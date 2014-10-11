@@ -1,0 +1,26 @@
+Apr 25, 2011 3:08:56 AM spec.jbb.JBBmain main -> INFO: Logging started
+Apr 25, 2011 3:08:56 AM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 1...
+Apr 25, 2011 3:08:59 AM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Apr 25, 2011 3:08:59 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Apr 25, 2011 3:08:59 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Apr 25 03:08:59 HKT 2011 for 0.5 minutes
+Apr 25, 2011 3:09:30 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Apr 25 03:09:30 HKT 2011
+Apr 25, 2011 3:09:30 AM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 2...
+Apr 25, 2011 3:09:34 AM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Apr 25, 2011 3:09:34 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Apr 25, 2011 3:09:34 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Apr 25, 2011 3:09:34 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Apr 25 03:09:34 HKT 2011 for 0.5 minutes
+Apr 25, 2011 3:10:05 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Apr 25 03:10:05 HKT 2011
+Apr 25, 2011 3:10:05 AM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 3...
+Apr 25, 2011 3:10:13 AM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Apr 25, 2011 3:10:13 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Apr 25, 2011 3:10:13 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Apr 25, 2011 3:10:13 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Apr 25, 2011 3:10:13 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Apr 25 03:10:13 HKT 2011 for 0.5 minutes
+Apr 25, 2011 3:10:45 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Apr 25 03:10:45 HKT 2011
+Apr 25, 2011 3:10:45 AM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 4...
+Apr 25, 2011 3:10:47 AM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Apr 25, 2011 3:10:47 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Apr 25, 2011 3:10:47 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Apr 25, 2011 3:10:47 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Apr 25, 2011 3:10:47 AM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 4
+Apr 25, 2011 3:10:47 AM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Apr 25 03:10:47 HKT 2011 for 0.5 minutes

@@ -1,0 +1,194 @@
+Opened results/SPECjbbSingleJVM/SPECjbb.016.results
+Opened results/SPECjbbSingleJVM/SPECjbb.016.raw
+
+Licensed Materials - Property of SPEC
+SPECjbb2005
+Copyright (c) 2005 Standard Performance Evaluation Corporation (SPEC),All rights reserved,
+
+Benchmark SPECjbb2005 1.07 now Opening
+
+jbb.jar not in CLASSPATH
+
+
+Checking whether run will be valid
+
+Run will be COMPLIANT
+
+Constructing the company now   Hang....on
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 1...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+Timing Measurement began Sun Apr 24 22:36:08 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sun Apr 24 22:36:40 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 33713
+Maximum transactions by a warehouse = 33713
+Difference (thread spread) = 0 (0%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 1 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:     14786     14.94   0.000   2.890   0.001   total     2168.0MB
+      Payment:     10215      3.76   0.000   1.314   0.000    used     1880.9MB
+  OrderStatus:      1022      0.23   0.000   0.003   0.000
+     Delivery:      1021      4.59   0.001   1.762   0.004
+  Stock Level:      1022      0.71   0.000   0.350   0.001
+  Cust Report:      5647      7.74   0.000   1.447   0.001
+
+           throughput =       1042.00 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 2...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+Timing Measurement began Sun Apr 24 22:36:44 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sun Apr 24 22:37:20 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 15450
+Maximum transactions by a warehouse = 15560
+Difference (thread spread) = 110 (0.71%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 2 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:     13602     42.69   0.000   6.760   0.003   total     4048.6MB
+      Payment:      9396     13.98   0.000   3.513   0.001    used     3634.6MB
+  OrderStatus:       939      0.49   0.000   0.003   0.001
+     Delivery:       940      3.08   0.002   0.628   0.003
+  Stock Level:       941      4.37   0.000   3.760   0.005
+  Cust Report:      5192      6.23   0.000   0.716   0.001
+
+           throughput =        868.60 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 3...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+Timing Measurement began Sun Apr 24 22:37:22 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sun Apr 24 22:37:52 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 5726
+Maximum transactions by a warehouse = 7608
+Difference (thread spread) = 1882 (24.74%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 3 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:      8437     27.67   0.000   5.819   0.003   total     4556.9MB
+      Payment:      5815     35.21   0.000   6.331   0.006    used     4042.9MB
+  OrderStatus:       581      1.03   0.000   0.147   0.002
+     Delivery:       580      6.37   0.000   4.633   0.011
+  Stock Level:       581      0.68   0.000   0.057   0.001
+  Cust Report:      3173     18.56   0.000   6.331   0.006
+
+           throughput =        638.41 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 4...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+Timing Measurement began Sun Apr 24 22:37:55 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sun Apr 24 22:38:25 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 4569
+Maximum transactions by a warehouse = 5305
+Difference (thread spread) = 736 (13.87%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 4 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:      8575     59.58   0.000   7.058   0.007   total     5086.8MB
+      Payment:      5910     25.95   0.000   4.326   0.004    used     4654.9MB
+  OrderStatus:       591      2.58   0.000   1.248   0.004
+     Delivery:       591      4.55   0.002   1.258   0.008
+  Stock Level:       591      0.97   0.000   0.006   0.002
+  Cust Report:      3245     25.98   0.000   7.057   0.008
+
+           throughput =        649.62 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 5...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+  started user thread for Warehouse 5
+Timing Measurement began Sun Apr 24 22:38:28 HKT 2011 for 0.5 minutes
+Exception in thread "Thread-13" Exception in thread "Thread-15" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:2760)
+	at java.util.Arrays.copyOf(Arrays.java:2734)
+	at java.util.Vector.ensureCapacityHelper(Vector.java:226)
+	at java.util.Vector.add(Vector.java:728)
+	at edu.hkust.leap.monitor.RecordMonitor.accessSPE(RecordMonitor.java:146)
+	at edu.hkust.leap.monitor.RecordMonitor.writeBeforeArrayElem(RecordMonitor.java:108)
+	at spec.jbb.infra.Util.TransactionLogBuffer.clearBuffer(TransactionLogBuffer.java:132)
+	at spec.jbb.CustomerReportTransaction.processTransactionLog(CustomerReportTransaction.java:244)
+	at spec.jbb.TransactionManager.runTxn(TransactionManager.java:93)
+	at spec.jbb.TransactionManager.goManual(TransactionManager.java:122)
+	at spec.jbb.TransactionManager.go(TransactionManager.java:187)
+	at spec.jbb.JBBmain.run(JBBmain.java:90)
+	at java.lang.Thread.run(Thread.java:619)
+java.lang.IllegalMonitorStateException
+	at spec.jbb.DeliveryTransaction.process(DeliveryTransaction.java:206)
+	at spec.jbb.TransactionManager.runTxn(TransactionManager.java:92)
+	at spec.jbb.TransactionManager.goManual(TransactionManager.java:122)
+	at spec.jbb.TransactionManager.go(TransactionManager.java:187)
+	at spec.jbb.JBBmain.run(JBBmain.java:90)
+	at java.lang.Thread.run(Thread.java:619)
+Exception in thread "Thread-11" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:2760)
+	at java.util.Arrays.copyOf(Arrays.java:2734)
+	at java.util.Vector.ensureCapacityHelper(Vector.java:226)
+	at java.util.Vector.add(Vector.java:728)
+	at edu.hkust.leap.monitor.RecordMonitor.accessSPE(RecordMonitor.java:146)
+	at edu.hkust.leap.monitor.RecordMonitor.writeBeforeArrayElem(RecordMonitor.java:108)
+	at spec.jbb.infra.Util.TransactionLogBuffer.clearBuffer(TransactionLogBuffer.java:132)
+	at spec.jbb.NewOrderTransaction.processTransactionLog(NewOrderTransaction.java:173)
+	at spec.jbb.TransactionManager.runTxn(TransactionManager.java:93)
+	at spec.jbb.TransactionManager.goManual(TransactionManager.java:122)
+	at spec.jbb.TransactionManager.go(TransactionManager.java:187)
+	at spec.jbb.JBBmain.run(JBBmain.java:90)
+	at java.lang.Thread.run(Thread.java:619)
+Exception in thread "Thread-14" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:2760)

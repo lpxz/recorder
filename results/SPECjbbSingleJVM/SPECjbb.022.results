@@ -1,0 +1,207 @@
+Opened results/SPECjbbSingleJVM/SPECjbb.022.results
+Opened results/SPECjbbSingleJVM/SPECjbb.022.raw
+
+Licensed Materials - Property of SPEC
+SPECjbb2005
+Copyright (c) 2005 Standard Performance Evaluation Corporation (SPEC),All rights reserved,
+
+Benchmark SPECjbb2005 1.07 now Opening
+
+jbb.jar not in CLASSPATH
+
+
+Checking whether run will be valid
+
+Run will be COMPLIANT
+
+Constructing the company now   Hang....on
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 1...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+Timing Measurement began Mon Apr 25 03:12:53 HKT 2011 for 0.5 minutes
+Timing Measurement ended Mon Apr 25 03:13:23 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 30042
+Maximum transactions by a warehouse = 30042
+Difference (thread spread) = 0 (0%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 1 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:     13206      7.96   0.000   1.520   0.001   total     2701.1MB
+      Payment:      9101      5.38   0.000   1.761   0.001    used     2517.3MB
+  OrderStatus:       910      0.19   0.000   0.003   0.000
+     Delivery:       910      5.57   0.000   1.833   0.006
+  Stock Level:       910      0.34   0.000   0.002   0.000
+  Cust Report:      5005     10.07   0.000   1.625   0.002
+
+           throughput =       1000.73 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 2...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+Timing Measurement began Mon Apr 25 03:13:29 HKT 2011 for 0.5 minutes
+Timing Measurement ended Mon Apr 25 03:14:00 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 9998
+Maximum transactions by a warehouse = 10349
+Difference (thread spread) = 351 (3.39%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 2 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:      8928     21.68   0.000   4.323   0.002   total     2562.7MB
+      Payment:      6168      8.01   0.000   2.019   0.001    used     2238.4MB
+  OrderStatus:       616      4.27   0.000   3.297   0.007
+     Delivery:       617      7.19   0.002   4.117   0.012
+  Stock Level:       617      0.48   0.000   0.030   0.001
+  Cust Report:      3401     14.41   0.000   4.118   0.004
+
+           throughput =        670.30 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 3...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+Timing Measurement began Mon Apr 25 03:14:01 HKT 2011 for 0.5 minutes
+Timing Measurement ended Mon Apr 25 03:14:33 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 5587
+Maximum transactions by a warehouse = 5884
+Difference (thread spread) = 297 (5.05%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 3 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:      7550     37.51   0.000   6.836   0.005   total     4481.9MB
+      Payment:      5181     21.52   0.000   6.832   0.004    used     3982.0MB
+  OrderStatus:       517      0.69   0.000   0.063   0.001
+     Delivery:       517      4.08   0.002   2.432   0.008
+  Stock Level:       519      0.47   0.000   0.004   0.001
+  Cust Report:      2812     16.47   0.000   6.833   0.006
+
+           throughput =        534.57 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 4...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+Timing Measurement began Mon Apr 25 03:14:42 HKT 2011 for 0.5 minutes
+Timing Measurement ended Mon Apr 25 03:15:12 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 5792
+Maximum transactions by a warehouse = 7143
+Difference (thread spread) = 1351 (18.91%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 4 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:     11504     58.47   0.000   4.061   0.005   total     4787.1MB
+      Payment:      7909     30.69   0.000   4.061   0.004    used     4476.3MB
+  OrderStatus:       791      1.64   0.000   0.007   0.002
+     Delivery:       790      3.94   0.000   1.275   0.005
+  Stock Level:       790      1.31   0.000   0.006   0.002
+  Cust Report:      4315     24.20   0.000   4.061   0.006
+
+           throughput =        863.63 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 5...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+  started user thread for Warehouse 5
+Timing Measurement began Mon Apr 25 03:15:16 HKT 2011 for 0.5 minutes
+Timing Measurement ended Mon Apr 25 03:15:46 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 2374
+Maximum transactions by a warehouse = 3611
+Difference (thread spread) = 1237 (34.26%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 5 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:      6654     35.88   0.000   8.505   0.005   total     5246.4MB
+      Payment:      4597     44.84   0.000   8.505   0.010    used     4898.9MB
+  OrderStatus:       459      9.83   0.000   8.508   0.021
+     Delivery:       460      3.17   0.002   1.295   0.007
+  Stock Level:       460      7.91   0.000   6.933   0.017
+  Cust Report:      2537     45.62   0.000   8.507   0.018
+
+           throughput =        505.20 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 6...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+  started user thread for Warehouse 5
+  started user thread for Warehouse 6
+Timing Measurement began Mon Apr 25 03:15:49 HKT 2011 for 0.5 minutes
+Exception in thread "Thread-18" Exception in thread "Thread-16" java.lang.OutOfMemoryError: Java heap space
+	at java.util.Arrays.copyOf(Arrays.java:2760)
+	at java.util.Arrays.copyOf(Arrays.java:2734)
+	at java.util.Vector.ensureCapacityHelper(Vector.java:226)
+	at java.util.Vector.add(Vector.java:728)
+	at edu.hkust.leap.monitor.RecordMonitor.accessSPE(RecordMonitor.java:147)
+	at edu.hkust.leap.monitor.RecordMonitor.writeBeforeArrayElem(RecordMonitor.java:109)
+	at spec.jbb.infra.Util.TransactionLogBuffer.clearBuffer(TransactionLogBuffer.java:132)
+	at spec.jbb.NewOrderTransaction.processTransactionLog(NewOrderTransaction.java:173)
+	at spec.jbb.TransactionManager.runTxn(TransactionManager.java:93)
+	at spec.jbb.TransactionManager.goManual(TransactionManager.java:122)
+	at spec.jbb.TransactionManager.go(TransactionManager.java:187)
+	at spec.jbb.JBBmain.run(JBBmain.java:90)
+	at java.lang.Thread.run(Thread.java:619)
+java.lang.OutOfMemoryError: Java heap space

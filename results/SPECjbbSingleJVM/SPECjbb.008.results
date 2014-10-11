@@ -1,0 +1,212 @@
+Opened results/SPECjbbSingleJVM/SPECjbb.008.results
+Opened results/SPECjbbSingleJVM/SPECjbb.008.raw
+
+Licensed Materials - Property of SPEC
+SPECjbb2005
+Copyright (c) 2005 Standard Performance Evaluation Corporation (SPEC),All rights reserved,
+
+Benchmark SPECjbb2005 1.07 now Opening
+
+jbb.jar not in CLASSPATH
+
+
+Checking whether run will be valid
+
+Run will be COMPLIANT
+
+Constructing the company now   Hang....on
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 1...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+Timing Measurement began Sat Apr 16 14:05:36 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sat Apr 16 14:06:06 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 35606
+Maximum transactions by a warehouse = 35606
+Difference (thread spread) = 0 (0%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 1 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:     15678     10.47   0.000   1.756   0.001   total     2070.3MB
+      Payment:     10790      3.76   0.000   1.669   0.000    used     1807.7MB
+  OrderStatus:      1079      0.21   0.000   0.001   0.000
+     Delivery:      1079      9.53   0.000   3.549   0.009
+  Stock Level:      1079      0.27   0.000   0.003   0.000
+  Cust Report:      5901      4.67   0.000   1.214   0.001
+
+           throughput =       1185.80 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 2...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+Timing Measurement began Sat Apr 16 14:06:10 HKT 2011 for 0.5 minutes
+log4j:WARN No appenders could be found for logger (org.jboss.serial.util.HashStringUtil).
+log4j:WARN Please initialize the log4j system properly.
+Timing Measurement ended Sat Apr 16 14:06:40 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 13102
+Maximum transactions by a warehouse = 13159
+Difference (thread spread) = 57 (0.43%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 2 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:     11581     33.16   0.000   6.511   0.003   total     3990.9MB
+      Payment:      7960      9.50   0.000   2.183   0.001    used     3553.2MB
+  OrderStatus:       796      0.48   0.000   0.002   0.001
+     Delivery:       796      1.68   0.000   0.624   0.002
+  Stock Level:       796      1.05   0.000   0.602   0.001
+  Cust Report:      4332      3.91   0.000   0.620   0.001
+
+           throughput =        874.84 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 3...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+Timing Measurement began Sat Apr 16 14:07:29 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sat Apr 16 14:08:01 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 3573
+Maximum transactions by a warehouse = 4679
+Difference (thread spread) = 1106 (23.64%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 3 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:      5225     29.51   0.000   6.829   0.006   total     4345.1MB
+      Payment:      3595     15.84   0.000   6.835   0.004    used     3747.9MB
+  OrderStatus:       361      1.79   0.001   1.203   0.005
+     Delivery:       359      8.64   0.001   6.830   0.024
+  Stock Level:       361      2.79   0.000   1.204   0.008
+  Cust Report:      1961      6.50   0.000   1.218   0.003
+
+           throughput =        368.26 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 4...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+Timing Measurement began Sat Apr 16 14:18:44 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sat Apr 16 14:19:14 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 73
+Maximum transactions by a warehouse = 130
+Difference (thread spread) = 57 (43.85%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 4 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:       174     49.52   0.000  15.800   0.285   total     4425.4MB
+      Payment:       116      2.94   0.000   2.396   0.025    used     4033.0MB
+  OrderStatus:        11      0.26   0.000   0.255   0.023
+     Delivery:        12      1.41   0.001   1.385   0.117
+  Stock Level:        11     15.54   0.000  12.932   1.413
+  Cust Report:        56      2.23   0.000   0.916   0.040
+
+           throughput =         12.66 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 5...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+  started user thread for Warehouse 5
+Timing Measurement began Sat Apr 16 14:19:55 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sat Apr 16 14:20:25 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 244
+Maximum transactions by a warehouse = 489
+Difference (thread spread) = 245 (50.1%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 5 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:       739     34.38   0.000   7.832   0.047   total     4508.2MB
+      Payment:       511     41.60   0.000  10.511   0.081    used     4061.7MB
+  OrderStatus:        52      4.05   0.000   3.945   0.078
+     Delivery:        52      0.35   0.001   0.136   0.007
+  Stock Level:        51      0.77   0.000   0.486   0.015
+  Cust Report:       288     36.08   0.000  18.214   0.125
+
+           throughput =         56.40 SPECjbb2005 bops 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Loading Warehouse 6...
+
+
+Start User Threads
+  started user thread for Warehouse 1
+  started user thread for Warehouse 2
+  started user thread for Warehouse 3
+  started user thread for Warehouse 4
+  started user thread for Warehouse 5
+  started user thread for Warehouse 6
+Timing Measurement began Sat Apr 16 14:20:34 HKT 2011 for 0.5 minutes
+Timing Measurement ended Sat Apr 16 14:21:04 HKT 2011
+
+
+Calculating results
+
+Minimum transactions by a warehouse = 156
+Maximum transactions by a warehouse = 376
+Difference (thread spread) = 220 (58.51%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 6 warehouses                                   
+................. SPECjbb2005 1.07 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg    Heap Space
+    New Order:       672     56.25   0.000  27.464   0.084   total     4584.1MB
+      Payment:       461     62.15   0.000  27.471   0.135    used     4049.5MB
+  OrderStatus:        45      0.75   0.000   0.642   0.017
+     Delivery:        47     28.31   0.000  27.464   0.602
+  Stock Level:        45      0.04   0.000   0.030   0.001
