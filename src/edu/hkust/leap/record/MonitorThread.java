@@ -10,19 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.zip.GZIPOutputStream;
 
-import AVdetect.edge.LockingCausalEdge;
-import AVdetect.edge.abstractclass.CausalEdge;
-import AVdetect.eventnode.LockingEvent;
-import AVdetect.eventnode.SharedAccessEvent;
-import AVdetect.eventnode.UnlockingEvent;
-import AVdetect.eventnode.abstractclass.CriticalEvent;
-import AVdetect.eventnode.abstractclass.LockReleEvent;
-import AVdetect.graph.ARPair;
-import AVdetect.graph.CausalGraphFlipping;
-import AVdetect.graph.CausalGraphTraversal;
-import AVdetect.manager.AtomicRegionManager;
-import AVdetect.manager.ThreadManager;
-
 import edu.hkust.leap.monitor.RecordMonitor;
 import edu.hkust.leap.record.generator.CrashTestCaseGenerator;
 import edu.hkust.leap.record.utils.Serializer;
@@ -51,24 +38,7 @@ public class MonitorThread extends Thread
 			generateTestDriver(saveMonitorData());
 		}
 	   
-		edgeStatistic();
-	  
-	    Set<ARPair> arps = AtomicRegionManager.findARs(RecordMonitor.cg);
-	   System.err.println("first run:");
-	    boolean mark = true;
-	    for (ARPair arPair : arps) 	
-	    {
-	    	if(mark)
-	    	{
-	    		CausalGraphTraversal.smartCycleDetection(RecordMonitor.cg,arPair );
-	    		mark = false;
-	    	}	    	
-	    }
-	    
-//	    
-	//	CausalGraphFlipping.flippable(RecordMonitor.cg);
-	    
-	    // task3:
+		
 	    
 	    
 	}
@@ -84,30 +54,7 @@ public class MonitorThread extends Thread
 //    	}
 //	}
 	
-	public void edgeStatistic()
-	{
-		int lo=  CausalGraphTraversal.getLockingEdges(RecordMonitor.cg).size();
-		   int com = CausalGraphTraversal.getCommunicationEdges(RecordMonitor.cg).size();
-		   int sha = CausalGraphTraversal.getSharedAccessEdges(RecordMonitor.cg).size();
-		   int local = CausalGraphTraversal.getLocalEdges(RecordMonitor.cg).size();
-		   int total = RecordMonitor.cg.coreG.edgeSet().size();
-		   if(total != lo + com + sha + local)
-		   {
-			   System.err.println("waht is up!!");
-			   System.err.println("lo:" +lo);
-			   System.err.println("com:" +com);
-			   System.err.println("sha:" +sha);
-			   System.err.println("local:" +local);
-			   System.err.println("total:" +total);
-		   }
-		   else {
-			   System.err.println("lo:" +lo);
-			   System.err.println("com:" +com);
-			   System.err.println("sha:" +sha);
-			   System.err.println("local:" +local);
-			   System.err.println("total:" +total);
-		   }
-	}
+
 
 //	public void sharedMemStatistic()
 //	{// shared variables
