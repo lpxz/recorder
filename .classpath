@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="edu/hkust/leap/monitor/random/Monitor.java|edu/hkust/leap/datastructure/MyAccessVector.java|edu/hkust/leap/datastructure/" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Transformer/tmp/record" sourcepath="/home/lpxz/eclipse/workspace/specjbb2005107_runnable/src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/soot24"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/app"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
