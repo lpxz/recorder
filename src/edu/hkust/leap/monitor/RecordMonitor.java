@@ -240,8 +240,6 @@ public class RecordMonitor {
 	
 	
 	
-	
-	
 	  public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,boolean value) {		
 		  accessSPE(iid,id, true);		
 		  if(stride){
@@ -596,12 +594,20 @@ public class RecordMonitor {
 //    	accessSPE(index,tid, false);
 //    }
 
+	    public static int rCount = 0;
+	    public static int wCount = 0;
 	    public static boolean fakedShared = true;
 	public static void accessSPE(int index,long threadId, boolean read) {
 //		System.out.println(threadId);
-
+        if(read) rCount++;
+        else {
+			 wCount++;
+		}
+        
 		if(leap){
+			
 			synchronized (accessVectorGroup[index]) {
+				
 	        	accessVectorGroup[index].add(threadId);
 			}
 		}else if(stride){
@@ -624,25 +630,28 @@ public class RecordMonitor {
 			
 			
 			if(!read)
-			{				   
+			{		
+
 			    synchronized (locks4latestWrites[index])
 			    {
 			    	oldLatestTID= latestWritesTid[index];
 					oldLatestInstCounter= latestWritesInstCounter[index];
+					
 					latestWritesTid[index] = threadId;
 					latestWritesInstCounter[index] = instCounter;	
 				}	
 			    // store the relation: latest write -> current write, if they belong to different threads.
-			    if(oldLatestTID>=0 && oldLatestTID!=threadId){			    	
-					synchronized (mappingsGroup[index]) {
-						mappingsGroup[index].add(oldLatestTID);
-						mappingsGroup[index].add(oldLatestInstCounter);
-						
-						mappingsGroup[index].add(threadId);
-						mappingsGroup[index].add(instCounter);
-					}
-				}
-			}
+//			    if(oldLatestTID>=0 && oldLatestTID!=threadId)
+//			    {	
+//					synchronized (mappingsGroup[index]) {
+//						mappingsGroup[index].add(oldLatestTID);
+//						mappingsGroup[index].add(oldLatestInstCounter);
+//						
+//						mappingsGroup[index].add(threadId);
+//						mappingsGroup[index].add(instCounter);
+//					}
+//				}
+			 }
 			else//	if(read)
 			{
 				for(;;){
@@ -659,27 +668,27 @@ public class RecordMonitor {
 				}				
 				// store the relation: latest write -> current read, if they belong to different threads.
 				//opt_Reads_of_same_write&&
-				if(writeTIDOfLastReadOfAccess[(int)threadId][index]==oldLatestTID && writeCounterOfLastReadOfAccess[(int)threadId][index]==oldLatestInstCounter )
-				{
-					// last read (local) and this read read from same write. 
-				}
-				else {
-					if(oldLatestTID!=threadId)//write and read from same thread.
-					{
-						synchronized (mappingsGroup[index]) {
-							mappingsGroup[index].add(oldLatestTID);
-							mappingsGroup[index].add(oldLatestInstCounter);						
-							mappingsGroup[index].add(threadId);
-							mappingsGroup[index].add(instCounter);
-						}
-						
-//						if(opt_Reads_of_same_write)
-						{
-						   writeTIDOfLastReadOfAccess[(int)threadId][index]=oldLatestTID ;
-						   writeCounterOfLastReadOfAccess[(int)threadId][index]=oldLatestInstCounter ;
-						}		
-					}
-				}
+//				if(writeTIDOfLastReadOfAccess[(int)threadId][index]==oldLatestTID && writeCounterOfLastReadOfAccess[(int)threadId][index]==oldLatestInstCounter )
+//				{
+//					// last read (local) and this read read from same write. 
+//				}
+//				else {
+//					if(oldLatestTID!=threadId)//write and read from same thread.
+//					{
+//						synchronized (mappingsGroup[index]) {
+//							mappingsGroup[index].add(oldLatestTID);
+//							mappingsGroup[index].add(oldLatestInstCounter);						
+//							mappingsGroup[index].add(threadId);
+//							mappingsGroup[index].add(instCounter);
+//						}
+//						
+////						if(opt_Reads_of_same_write)
+//						{
+//						   writeTIDOfLastReadOfAccess[(int)threadId][index]=oldLatestTID ;
+//						   writeCounterOfLastReadOfAccess[(int)threadId][index]=oldLatestInstCounter ;
+//						}		
+//					}
+//				}
 			}
 			
 		}else {
