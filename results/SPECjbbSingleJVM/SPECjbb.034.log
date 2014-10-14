@@ -1,0 +1,68 @@
+Oct 13, 2014 6:22:03 PM spec.jbb.JBBmain main -> INFO: Logging started
+Oct 13, 2014 6:22:03 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 1...
+Oct 13, 2014 6:22:03 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:22:03 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:22:03 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:22:03 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:22:33 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:22:33 EDT 2014
+Oct 13, 2014 6:22:33 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 2...
+Oct 13, 2014 6:22:33 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:22:33 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:22:33 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:22:33 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:22:33 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:23:05 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:23:05 EDT 2014
+Oct 13, 2014 6:23:05 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 3...
+Oct 13, 2014 6:23:05 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:23:05 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:23:05 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:23:05 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Oct 13, 2014 6:23:05 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:23:05 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:23:38 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:23:38 EDT 2014
+Oct 13, 2014 6:23:38 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 4...
+Oct 13, 2014 6:23:38 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:23:38 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:23:38 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:23:38 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Oct 13, 2014 6:23:38 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 4
+Oct 13, 2014 6:23:38 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:23:38 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:24:09 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:24:09 EDT 2014
+Oct 13, 2014 6:24:09 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 5...
+Oct 13, 2014 6:24:09 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:24:09 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:24:09 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:24:09 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Oct 13, 2014 6:24:09 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 4
+Oct 13, 2014 6:24:09 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 5
+Oct 13, 2014 6:24:09 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:24:09 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:24:43 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:24:43 EDT 2014
+Oct 13, 2014 6:24:43 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 6...
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 4
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 5
+Oct 13, 2014 6:24:43 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 6
+Oct 13, 2014 6:24:43 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:24:43 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:25:17 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:25:17 EDT 2014
+Oct 13, 2014 6:25:17 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 7...
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 4
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 5
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 6
+Oct 13, 2014 6:25:17 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 7
+Oct 13, 2014 6:25:17 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:25:17 EDT 2014 for 0.5 minutes
+Oct 13, 2014 6:25:52 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 18:25:52 EDT 2014
+Oct 13, 2014 6:25:52 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 8...
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 3
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 4
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 5
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 6
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 7
+Oct 13, 2014 6:25:52 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 8
+Oct 13, 2014 6:25:52 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 18:25:52 EDT 2014 for 4 minutes

@@ -1,0 +1,10 @@
+Oct 13, 2014 10:43:53 PM spec.jbb.JBBmain main -> INFO: Logging started
+Oct 13, 2014 10:43:53 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 1...
+Oct 13, 2014 10:43:53 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 2...
+Oct 13, 2014 10:43:53 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
+Oct 13, 2014 10:43:53 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
+Oct 13, 2014 10:43:53 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 2
+Oct 13, 2014 10:43:53 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Mon Oct 13 22:43:53 EDT 2014 for 0.07 minutes
+Oct 13, 2014 10:43:57 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement ended Mon Oct 13 22:43:57 EDT 2014
+Oct 13, 2014 10:43:57 PM spec.jbb.JBBmain callReporter -> INFO: Calling Reporter
+Oct 13, 2014 10:43:57 PM spec.jbb.JBBmain main -> INFO: Logging ended
