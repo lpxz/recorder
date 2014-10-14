@@ -872,6 +872,7 @@ public class RecordMonitor {
 						mappingsGroup[index].add(oldLatestInstCounter);						
 						mappingsGroup[index].add(instCounter);
 					}
+					
 				}
 			    else {
 					wCount++;
