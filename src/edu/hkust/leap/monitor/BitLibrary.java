@@ -17,18 +17,26 @@ public class BitLibrary {
 
 		// address type, o, f
 		
-		int i=1;
-		
-		int j = 100;
-		
-		int k= (j<<20)+1;
-//        System.out.println(k);
-//        System.out.println(toBinary(keepNbits(k, 15)));
-        System.out.println(((int)Math.pow(2, 5)-1));
+//		int i=1;
+//		
+//		int j = 100;
+//		
+//		int k= (j<<20)+1;
+////        System.out.println(k);
+////        System.out.println(toBinary(keepNbits(k, 15)));
+//        System.out.println(((int)Math.pow(2, 5)-1));
+        long k = 134217730;
+                  
+        
+        long m = ((long)1)<<59;
+        System.out.println(m);
+        
+        System.out.println(Long.toBinaryString((m>>59)));
+        
         
 		
 		
-//		System.out.println(toBinary(32767));
+		System.out.println(toBinary(134217730));
 		
 		
 
@@ -79,9 +87,9 @@ public class BitLibrary {
 	 */
 	
 	public static int compute(int baseObject, int fieldorarrayIndex) {        				
-//		int ret=  (keep5bits(baseObject)<<5) + keep5bits(fieldorarrayIndex);
+		int ret=  (keep5bits(baseObject)<<5) + keep5bits(fieldorarrayIndex);
 		
-		return 1;
+		return ret;
 	}
 	
 	

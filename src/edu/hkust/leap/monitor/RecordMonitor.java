@@ -52,7 +52,7 @@ public class RecordMonitor {
 	
 	public static long[] instCounterGroup;	
 	
-	public static long[] latestWritesTid;	//latest write's thread, lastest write's inst counter.
+//	public static long[] latestWritesTid;	//latest write's thread, lastest write's inst counter.
 	public static long[] latestWritesInstCounter;
 	public static Object[] locks4latestWrites;	//latest write's thread, lastest write's inst counter.
 	
@@ -89,15 +89,15 @@ public class RecordMonitor {
 		instCounterGroup =new long[threadSize];
 		for(int i=0;i<threadSize;i++)
 		{
-			instCounterGroup[i] = 0;	// initialize		
+			instCounterGroup[i] = ((long)i)<<59;	// initialize		
 		}
 		
 		
-		latestWritesTid = new long[accessedLocSize];
-		for(int i=0;i<accessedLocSize;i++)
-		{
-			latestWritesTid[i] = -1;	// initialize		
-		}
+//		latestWritesTid = new long[accessedLocSize];
+//		for(int i=0;i<accessedLocSize;i++)
+//		{
+//			latestWritesTid[i] = -1;	// initialize		
+//		}
 		
 		latestWritesInstCounter = new long[accessedLocSize];
 		for(int i=0;i<accessedLocSize;i++)
@@ -822,10 +822,8 @@ public class RecordMonitor {
 	    public static boolean fakedShared = true;
 	public static void accessSPE(int index,long threadId, boolean read, int objSensIndex) {
 //		System.out.println(threadId);
-        if(read) rCount++;
-        else {
-			 wCount++;
-		}
+        
+
         
 		if(leap){
 			
@@ -852,7 +850,6 @@ public class RecordMonitor {
 			
 			long instCounter =incInsCounter(threadId);
 			
-			long oldLatestTID= -1;
 			long oldLatestInstCounter=-1;
 			
 			
@@ -863,33 +860,34 @@ public class RecordMonitor {
 				
 			    synchronized (locks4latestWrites[index])
 			    {
-			    	oldLatestTID= latestWritesTid[index];
-					oldLatestInstCounter= latestWritesInstCounter[index];
-					
-					latestWritesTid[index] = threadId;
+					oldLatestInstCounter= latestWritesInstCounter[index];					
 					latestWritesInstCounter[index] = instCounter;	
 				}	
 			    // store the relation: latest write -> current write, if they belong to different threads.
-			    if(oldLatestTID>=0 && oldLatestTID!=threadId)
+			    long oldLatestTID =oldLatestInstCounter>>59;
+			    if( oldLatestTID!=threadId)
 			    {	
+			    	rCount++;
 					synchronized (mappingsGroup[index]) {
-						mappingsGroup[index].add(oldLatestTID);
-						mappingsGroup[index].add(oldLatestInstCounter);
-						
-						mappingsGroup[index].add(threadId);
+						mappingsGroup[index].add(oldLatestInstCounter);						
 						mappingsGroup[index].add(instCounter);
 					}
+				}
+			    else {
+					wCount++;
 				}
 			 }
 			else//	if(read)
 			{
+				long oldLatestTID =-1;
 				for(;;){
-					oldLatestTID= latestWritesTid[index];
 					oldLatestInstCounter= latestWritesInstCounter[index];
+					oldLatestTID = oldLatestInstCounter >>59;
 				
 					boolean haha= fakedShared;
 					
-					if(latestWritesTid[index]==oldLatestTID && latestWritesInstCounter[index]==oldLatestInstCounter)
+					
+					if(((latestWritesInstCounter[index])>>59)==oldLatestTID && latestWritesInstCounter[index]==oldLatestInstCounter)
 					{
 						break;
 					}
@@ -897,17 +895,16 @@ public class RecordMonitor {
 				}				
 				// store the relation: latest write -> current read, if they belong to different threads.
 				//opt_Reads_of_same_write&&
-				if(writeTIDOfLastReadOfAccess[(int)threadId][index]==oldLatestTID && writeCounterOfLastReadOfAccess[(int)threadId][index]==oldLatestInstCounter )
+				if( writeCounterOfLastReadOfAccess[(int)threadId][index]==oldLatestInstCounter )
 				{
 					// last read (local) and this read read from same write. 
 				}
-				else {
+				else 
+				{
 					if(oldLatestTID!=threadId)//write and read from same thread.
 					{
 						synchronized (mappingsGroup[index]) {
-							mappingsGroup[index].add(oldLatestTID);
 							mappingsGroup[index].add(oldLatestInstCounter);						
-							mappingsGroup[index].add(threadId);
 							mappingsGroup[index].add(instCounter);
 						}
 						
