@@ -247,177 +247,357 @@ public class RecordMonitor {
 	
 	
 	
-	  public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,boolean value) {		
-		  int objsensIndex = -1;
-		  if(opt_obj_sensitivity){
-		     objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
-		  }
-		  
-		  accessSPE(iid,id, true, objsensIndex);		
-		  if(stride){
-			    perThreadGroup[(int)id].add(value);// value
-				perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-		  }			
+	  public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,boolean value) {
+		  if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					perThreadGroup[(int)id].add(value);// value
+					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+			}else if(myBasic){
+				 int objsensIndex = -1;
+				  if(opt_obj_sensitivity){
+				     objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
+				  }		
+				  accessSPE(iid,id, true, objsensIndex);	
+			}else {
+				// future
+			} 		
 	  }
+	  
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, boolean value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false,  objsensIndex);		
+	    	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+				 int objsensIndex = -1;
+				  if(opt_obj_sensitivity){
+				     objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
+				  }		
+				  accessSPE(iid,id, false, objsensIndex);	
+			}else {
+				// future
+			} 			
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,byte value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	   if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, byte value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(System.identityHashCode(o), arrayindex);
-			  }
-	    	 
-				  accessSPE(iid,id, false, objsensIndex);		
+	    	
+				  
+				  if(leap){			
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}
+					}else if(stride){
+							synchronized (accessVectorGroup[iid]) {
+								accessVectorGroup[iid].add(id);
+							}				
+					}else if(myBasic){
+						int objsensIndex  = -1;
+						  if(opt_obj_sensitivity){
+							  objsensIndex= BitLibrary.compute(System.identityHashCode(o), arrayindex);
+						  }
+				    	 
+							  accessSPE(iid,id, false, objsensIndex);		
+					}else {
+						// future
+					} 		
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,char value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, char value) {
-	    	int objsensIndex =   -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);		
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex =   -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);		
+				}else {
+					// future
+				} 	
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,double value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);		
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 			    	 
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, double value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);		
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);		
+				}else {
+					// future
+				} 	
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,float value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, float value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);		
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);		
+				}else {
+					// future
+				} 	
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,int value) {		
-	    	int objsensIndex = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex = BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex = BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, int value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);	
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);			
+				}else {
+					// future
+				} 
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,long value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, long value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);	
+	
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);			
+				}else {
+					// future
+				} 
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,short value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex, short value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);	
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);			
+				}else {
+					// future
+				} 
 	    }
 	    
 	    public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,Object value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,  Object value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);	
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);			
+				}else {
+					// future
+				} 
 	    }
 	    
 	    
@@ -429,176 +609,367 @@ public class RecordMonitor {
 //	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,boolean value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true,objsensIndex );
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true,objsensIndex );
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, boolean value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, false, objsensIndex);
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						synchronized (accessVectorGroup[iid]) {
+							accessVectorGroup[iid].add(id);
+						}				
+				}else if(myBasic){
+			    	int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, false, objsensIndex);			
+				}else {
+					// future
+				} 
 	    }
 	    
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,byte value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 		
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, byte value) {
+
+	   	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
 	    	int objsensIndex = -1;
 			  if(opt_obj_sensitivity){
 				  objsensIndex = BitLibrary.compute( System.identityHashCode(o), iid);
 			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+	   	 accessSPE(iid,id, false, objsensIndex);			
+		}else {
+			// future
+		} 
 	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,char value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, char value) {
-	    	int objsensIndex = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex = BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex = BitLibrary.compute( System.identityHashCode(o), iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);			
+			}else {
+				// future
+			} 
 	    }
 	    
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,double value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	       	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, double value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);		
+			}else {
+				// future
+			} 
 	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,float value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, float value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+				  }
+		   	     accessSPE(iid,id, false, objsensIndex);		
+			}else {
+				// future
+			} 
 	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,int value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	 
+	    	 
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, int value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);	
+			}else {
+				// future
+			} 
 	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,long value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, long value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);	
+			}else {
+				// future
+			} 
 	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,short value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);		
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, short value) {
+
+	 	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
 	    	int objsensIndex  = -1;
 			  if(opt_obj_sensitivity){
 				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
 			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+	   	 accessSPE(iid,id, false, objsensIndex);	
+		}else {
+			// future
+		} 
 	    }
 	    
 	    public static void readBeforeInstance(Object o, int iid,long id, String classname, int lineNO,Object value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, Object value) {
+
+	   	 
+	   	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
 	    	int objsensIndex  = -1;
 			  if(opt_obj_sensitivity){
 				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
 			  }
 	   	 accessSPE(iid,id, false, objsensIndex);
+		}else {
+			// future
+		} 
 	    }
 	    
 	    
@@ -610,202 +981,384 @@ public class RecordMonitor {
 //	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,boolean value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    		
+
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,boolean value) {
+
+	   	 
+	 	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
 	    	int objsensIndex  = -1;
 			  if(opt_obj_sensitivity){
 				  objsensIndex= BitLibrary.compute(0,  iid);
 			  }
 	   	 accessSPE(iid,id, false, objsensIndex);
+		}else {
+			// future
+		} 
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,byte value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	 
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,byte value) {
+
+	   	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
 	    	int objsensIndex  = -1;
 			  if(opt_obj_sensitivity){
 				  objsensIndex= BitLibrary.compute(0,  iid);
 			  }
 	   	 accessSPE(iid,id, false, objsensIndex);
+		}else {
+			// future
+		} 
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,char value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    		
+	    		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,char value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute(0,  iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);
+			}else {
+				// future
+			}
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,double value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }  
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	 
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }  
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,double value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute(0,  iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);
+			}else {
+				// future
+			}
 	    }
 	    
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,float value) {	
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	 	
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,float value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute(0,  iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);
+			}else {
+				// future
+			}
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,int value) {		
-	    	int objsensIndex = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex = BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex = BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,int value) {
+
+	   	 
+	   	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
 	    	int objsensIndex  = -1;
 			  if(opt_obj_sensitivity){
 				  objsensIndex= BitLibrary.compute(0,  iid);
 			  }
 	   	 accessSPE(iid,id, false, objsensIndex);
+		}else {
+			// future
+		}
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,long value) {		
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	 
+	    	 
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);		
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,long value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute(0,  iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);
+			}else {
+				// future
+			}
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,short value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex  = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex= BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,short value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute(0,  iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);
+			}else {
+				// future
+			}
 	    }
 	    
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,Object value) {	
-	    	int objsensIndex = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex = BitLibrary.compute(0,  iid);
-			  }
-	    	 accessSPE(iid,id, true, objsensIndex);	
-	    	 if(stride){
-				    perThreadGroup[(int)id].add(value);// value
-					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
-			  }		
+	    	
+	    	 	
+	    	 if(leap){			
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}
+				}else if(stride){
+						perThreadGroup[(int)id].add(value);// value
+						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
+				}else if(myBasic){
+					int objsensIndex = -1;
+					  if(opt_obj_sensitivity){
+						  objsensIndex = BitLibrary.compute(0,  iid);
+					  }
+			    	 accessSPE(iid,id, true, objsensIndex);	
+				}else {
+					// future
+				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,Object value) {
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+
+	   	 
+		   	if(leap){			
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}
+			}else if(stride){
+					synchronized (accessVectorGroup[iid]) {
+						accessVectorGroup[iid].add(id);
+					}				
+			}else if(myBasic){
+		    	int objsensIndex  = -1;
+				  if(opt_obj_sensitivity){
+					  objsensIndex= BitLibrary.compute(0,  iid);
+				  }
+		   	 accessSPE(iid,id, false, objsensIndex);
+			}else {
+				// future
+			}
 	    }
 	    
-	    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
     //deleted
@@ -817,87 +1370,61 @@ public class RecordMonitor {
 //    {
 //    	accessSPE(index,tid, false);
 //    }
+	    
+	    
 
 	    public static int rCount = 0;
 	    public static int wCount = 0;
 	    public static boolean fakedShared = true;
 	public static void accessSPE(int index,long threadId, boolean read, int objSensIndex) {
-//		System.out.println(threadId);
-        
-
-        
-		if(leap){
-			
-			synchronized (accessVectorGroup[index]) {
+		if(opt_obj_sensitivity)
+		{ index = objSensIndex; }
+		
+		
+		long curCounter =incInsCounter(threadId);
+		
+		if(!read)
+		{		
+			long oldLatestInstCounter=-1;
+			boolean add = false; 
+		    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
+		    {
+				oldLatestInstCounter= latestWritesInstCounter[index];	
+				if(!sameThread(oldLatestInstCounter, curCounter))
+				{
+					add = true;
+					
+				}					
+				latestWritesInstCounter[index] = curCounter;	
+			}	
+		    if(add)
+		    	addOrder(threadId, index, oldLatestInstCounter, curCounter);
+		 }
+		else//	if(read)
+		{
+			long counterOfTheWrite=-1;
+			for(;;){
+				counterOfTheWrite= latestWritesInstCounter[index];				
 				
-	        	accessVectorGroup[index].add(threadId);
+				if(latestWritesInstCounter[index]==counterOfTheWrite)
+				{
+					break;
+				}
+				// else loop back.
+			}				
+			// store the relation: latest write -> current read, if they belong to different threads.
+			//opt_Reads_of_same_write&&
+			if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+			{
+				if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+				{
+					addOrder(threadId, index, counterOfTheWrite, curCounter);
+				   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+				}
 			}
-		}else if(stride){
-			if(!read){
-				synchronized (accessVectorGroup[index]) {
-		        	accessVectorGroup[index].add(threadId);
-				}				
-			}else {
-				// record <value, version> per thread.
-				// we record them consequentially, avoiding creating new objects.
-				// put it into the call site.
-			}
-			
-			
-		}else if(myBasic){
-//			if(opt_obj_sensitivity)
-//			{ index = objSensIndex; }
-//			
-//			
-//			long curCounter =incInsCounter(threadId);
-//			
-//			if(!read)
-//			{		
-//				long oldLatestInstCounter=-1;
-//				boolean add = false; 
-//			    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
-//			    {
-//					oldLatestInstCounter= latestWritesInstCounter[index];	
-//					if(!sameThread(oldLatestInstCounter, curCounter))
-//					{
-//						add = true;
-//						
-//					}					
-//					latestWritesInstCounter[index] = curCounter;	
-//				}	
-//			    if(add)
-//			    	addOrder(threadId, index, oldLatestInstCounter, curCounter);
-//			    
-//			    	
-//			    
-//			 }
-//			else//	if(read)
-//			{
-//				long counterOfTheWrite=-1;
-//				for(;;){
-//					counterOfTheWrite= latestWritesInstCounter[index];				
-//					
-//					if(latestWritesInstCounter[index]==counterOfTheWrite)
-//					{
-//						break;
-//					}
-//					// else loop back.
-//				}				
-//				// store the relation: latest write -> current read, if they belong to different threads.
-//				//opt_Reads_of_same_write&&
-//				if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
-//				{
-//					if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
-//					{
-//						addOrder(threadId, index, counterOfTheWrite, curCounter);
-//					   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
-//					}
-//				}
-//			}
-			
-		}else {
-			// future
 		}
+		
+	
    	}
     /**
 	 * @param index
@@ -953,61 +1480,143 @@ public class RecordMonitor {
     {	
     	//accessSPE(index,tid);
     }
+    
+    // old-school methods:
     public static void enterMonitorAfter( int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute(0,  iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+	   	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void exitMonitorBefore(int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute(0,  iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void enterMonitorBefore( int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute(0,  iid);
-		  }
-    	 accessSPE(iid,id, false,objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void exitMonitorAfter(int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute(0,  iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void enterMonitorBefore(Object o, int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void enterMonitorAfter(Object o, int iid,long id) {
-    	int objsensIndex = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex = BitLibrary.compute( System.identityHashCode(o), iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void exitMonitorBefore(Object o,int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     public static void exitMonitorAfter(Object o,int iid,long id) {
-    	int objsensIndex  = -1;
-		  if(opt_obj_sensitivity){
-			  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-		  }
-    	 accessSPE(iid,id, false, objsensIndex);
+    	if(leap){			
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}
+		}else if(stride){
+				synchronized (accessVectorGroup[iid]) {
+					accessVectorGroup[iid].add(id);
+				}				
+		}else if(myBasic){
+			synchronized (accessVectorGroup[iid]) {
+				accessVectorGroup[iid].add(id);
+			}	
+		}else {
+			// future
+		}
     }
     
     
