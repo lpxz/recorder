@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.zip.GZIPOutputStream;
@@ -27,6 +28,18 @@ public class MonitorThread extends Thread
 
 		System.out.println("duration: " + (System.currentTimeMillis()- RecordMonitor.start));
 		
+//		for(int i=0;i<	RecordMonitor.myAccessVectorGroup.length; i++)
+//		{
+//			LinkedHashMap[] ith = RecordMonitor.myAccessVectorGroup[i];
+//			for(int j=0; j< ith.length; j++)
+//			{
+//				LinkedHashMap map = ith[j];
+//				System.out.println("map's size for T " + i+ " " + j + " :" + map.size() );
+//				
+//				
+//			}
+//		}
+			
 		if(RecordMonitor.isCrashed)
 		{
 			System.err.println("--- program crashed! ---");

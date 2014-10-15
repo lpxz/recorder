@@ -33,7 +33,7 @@ public class RecordMonitor {
 	public static boolean leap= false;//1163
 	public static boolean stride= false;
 	
-	public static boolean myBasic= true;//  752
+	public static boolean myBasic= true;//  // no need for sync!
 	public static boolean opt_reduce_write_seq = true;
 	public static boolean opt_obj_sensitivity = true;
 	
@@ -1372,8 +1372,10 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 	 * @param oldLatestInstCounter
 	 * @param instCounter
 	 */
+	
 	private static void addOrder(long threadid, int index, long oldLatestInstCounter, long instCounter) {
 // no need for sync!
+		
 		myAccessVectorGroup[(int)threadid][index].put(instCounter, oldLatestInstCounter);  	
 	}
 
