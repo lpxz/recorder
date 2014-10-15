@@ -37,7 +37,8 @@ public class RecordMonitor {
 	public static boolean stride= false;
 	
 	public static boolean myBasic= true;//  752
-	public static boolean opt_obj_sensitivity = true;
+	public static boolean opt_reduce_write_seq = true;
+//	public static boolean opt_obj_sensitivity = true;
 //	public static boolean opt_Reads_of_same_write=false; 
 	
 	
@@ -256,11 +257,7 @@ public class RecordMonitor {
 					perThreadGroup[(int)id].add(value);// value
 					perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 			}else if(myBasic){
-				 int objsensIndex = -1;
-				  if(opt_obj_sensitivity){
-				     objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
-				  }		
-				  accessSPE(iid,id, true, objsensIndex);	
+   			        accessSPE_array_index(iid,id, true, o, arrayindex);	
 			}else {
 				// future
 			} 		
@@ -276,11 +273,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-				 int objsensIndex = -1;
-				  if(opt_obj_sensitivity){
-				     objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
-				  }		
-				  accessSPE(iid,id, false, objsensIndex);	
+				accessSPE_array_index(iid,id, false, o, arrayindex);	
 			}else {
 				// future
 			} 			
@@ -295,11 +288,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_array_index(iid,id, true, o, arrayindex);	
 				}else {
 					// future
 				} 		
@@ -316,12 +305,7 @@ public class RecordMonitor {
 								accessVectorGroup[iid].add(id);
 							}				
 					}else if(myBasic){
-						int objsensIndex  = -1;
-						  if(opt_obj_sensitivity){
-							  objsensIndex= BitLibrary.compute(System.identityHashCode(o), arrayindex);
-						  }
-				    	 
-							  accessSPE(iid,id, false, objsensIndex);		
+						  accessSPE_array_index(iid,id, false, o, arrayindex);		
 					}else {
 						// future
 					} 		
@@ -336,11 +320,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_array_index(iid,id, true, o, arrayindex);	
 				}else {
 					// future
 				} 		
@@ -356,11 +336,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex =   -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);		
+					  accessSPE_array_index(iid,id, false, o, arrayindex);		
 				}else {
 					// future
 				} 	
@@ -375,11 +351,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_array_index(iid,id, true, o, arrayindex);	
 				}else {
 					// future
 				} 			    	 
@@ -395,11 +367,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);		
+					  accessSPE_array_index(iid,id, false, o, arrayindex);		
 				}else {
 					// future
 				} 	
@@ -414,11 +382,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_array_index(iid,id, true, o, arrayindex);	
 				}else {
 					// future
 				} 		
@@ -434,11 +398,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);		
+					  accessSPE_array_index(iid,id, false, o, arrayindex);		
 				}else {
 					// future
 				} 	
@@ -453,11 +413,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex = BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_array_index(iid,id, true, o, arrayindex);
 				}else {
 					// future
 				} 		
@@ -473,11 +429,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);			
+					  accessSPE_array_index(iid,id, false, o, arrayindex);			
 				}else {
 					// future
 				} 
@@ -492,11 +444,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_array_index(iid,id, true, o, arrayindex);
 				}else {
 					// future
 				} 		
@@ -512,11 +460,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);			
+					  accessSPE_array_index(iid,id, false, o, arrayindex);			
 				}else {
 					// future
 				} 
@@ -531,11 +475,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_array_index(iid,id, true, o, arrayindex);	
 				}else {
 					// future
 				} 		
@@ -551,11 +491,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);			
+					  accessSPE_array_index(iid,id, false, o, arrayindex);			
 				}else {
 					// future
 				} 
@@ -570,11 +506,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_array_index(iid,id, true, o, arrayindex);	
 				}else {
 					// future
 				} 		
@@ -590,15 +522,33 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), arrayindex);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);			
+					  accessSPE_array_index(iid,id, false, o, arrayindex);			
 				}else {
 					// future
 				} 
 	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 	    
 	  
@@ -617,11 +567,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true,objsensIndex );
+			    	 accessSPE_object_field(iid,id, true,o, iid );
 				}else {
 					// future
 				} 		
@@ -637,11 +583,7 @@ public class RecordMonitor {
 							accessVectorGroup[iid].add(id);
 						}				
 				}else if(myBasic){
-			    	int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, false, objsensIndex);			
+					  accessSPE_object_field(iid,id, false, o, iid);			
 				}else {
 					// future
 				} 
@@ -659,11 +601,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_object_field(iid,id, true, o, iid);	
 				}else {
 					// future
 				} 		
@@ -679,11 +617,7 @@ public class RecordMonitor {
 					accessVectorGroup[iid].add(id);
 				}				
 		}else if(myBasic){
-	    	int objsensIndex = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex = BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);			
+			  accessSPE_object_field(iid,id, false, o, iid);			
 		}else {
 			// future
 		} 
@@ -700,11 +634,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_object_field(iid,id, true, o,iid);
 				}else {
 					// future
 				} 	
@@ -720,11 +650,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex = BitLibrary.compute( System.identityHashCode(o), iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);			
+				  accessSPE_object_field(iid,id, false, o, iid);			
 			}else {
 				// future
 			} 
@@ -740,11 +666,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_object_field(iid,id, true, o, iid);
 				}else {
 					// future
 				} 	
@@ -761,11 +683,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);		
+				  accessSPE_object_field(iid,id, false, o,iid);		
 			}else {
 				// future
 			} 
@@ -780,11 +698,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_object_field(iid,id, true, o,iid);	
 				}else {
 					// future
 				} 	
@@ -800,11 +714,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-				  }
-		   	     accessSPE(iid,id, false, objsensIndex);		
+				  accessSPE_object_field(iid,id, false, o, iid);		
 			}else {
 				// future
 			} 
@@ -822,11 +732,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_object_field(iid,id, true, o, iid);	
 				}else {
 					// future
 				} 	
@@ -842,11 +748,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);	
+				  accessSPE_object_field(iid,id, false, o,iid);	
 			}else {
 				// future
 			} 
@@ -863,11 +765,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_object_field(iid,id, true, o,iid);	
 				}else {
 					// future
 				} 	
@@ -883,11 +781,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);	
+				  accessSPE_object_field(iid,id, false, o,iid);	
 			}else {
 				// future
 			} 
@@ -902,11 +796,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);		
+					  accessSPE_object_field(iid,id, true, o,iid);		
 				}else {
 					// future
 				} 	
@@ -922,11 +812,7 @@ public class RecordMonitor {
 					accessVectorGroup[iid].add(id);
 				}				
 		}else if(myBasic){
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);	
+			  accessSPE_object_field(iid,id, false, o,iid);	
 		}else {
 			// future
 		} 
@@ -941,15 +827,13 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_object_field(iid,id, true, o,iid);	
 				}else {
 					// future
 				} 	
 	    }
+	    
+	    
 	    public static void writeBeforeInstance(Object o, int iid,long id, String classname, int lineNO, Object value) {
 
 	   	 
@@ -962,15 +846,24 @@ public class RecordMonitor {
 					accessVectorGroup[iid].add(id);
 				}				
 		}else if(myBasic){
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute( System.identityHashCode(o), iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+			  accessSPE_object_field(iid,id, false, o,iid);
 		}else {
 			// future
 		} 
 	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 	    
 	    
@@ -981,8 +874,6 @@ public class RecordMonitor {
 //	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,boolean value) {	
-	    		
-
 	    	 if(leap){			
 					synchronized (accessVectorGroup[iid]) {
 						accessVectorGroup[iid].add(id);
@@ -991,11 +882,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_static_field(iid,id, true,  iid);
 				}else {
 					// future
 				} 	
@@ -1012,11 +899,7 @@ public class RecordMonitor {
 					accessVectorGroup[iid].add(id);
 				}				
 		}else if(myBasic){
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+	    	  accessSPE_static_field(iid,id, false, iid);
 		}else {
 			// future
 		} 
@@ -1033,11 +916,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_static_field(iid,id, true, iid);
 				}else {
 					// future
 				} 	
@@ -1053,11 +932,7 @@ public class RecordMonitor {
 					accessVectorGroup[iid].add(id);
 				}				
 		}else if(myBasic){
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+			  accessSPE_static_field(iid,id, false, iid);
 		}else {
 			// future
 		} 
@@ -1074,11 +949,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);
+					  accessSPE_static_field(iid,id, true, iid);
 				}else {
 					// future
 				} 	
@@ -1095,11 +966,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute(0,  iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);
+				  accessSPE_static_field(iid,id, false, iid);
 			}else {
 				// future
 			}
@@ -1116,19 +983,12 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }  
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_static_field(iid,id, true, iid);	
 				}else {
 					// future
 				} 	
 	    }
 	    public static void writeBeforeStatic(int iid,long id, String classname, int lineNO,double value) {
-
-	   	 
-	   	 
 		   	if(leap){			
 				synchronized (accessVectorGroup[iid]) {
 					accessVectorGroup[iid].add(id);
@@ -1138,11 +998,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute(0,  iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);
+				  accessSPE_static_field(iid,id, false, iid);
 			}else {
 				// future
 			}
@@ -1160,11 +1016,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_static_field(iid,id, true, iid);	
 				}else {
 					// future
 				} 	
@@ -1182,11 +1034,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute(0,  iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);
+		    	  accessSPE_static_field(iid,id, false, iid);
 			}else {
 				// future
 			}
@@ -1201,11 +1049,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex = BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_static_field(iid,id, true, iid);	
 				}else {
 					// future
 				} 	
@@ -1222,19 +1066,13 @@ public class RecordMonitor {
 					accessVectorGroup[iid].add(id);
 				}				
 		}else if(myBasic){
-	    	int objsensIndex  = -1;
-			  if(opt_obj_sensitivity){
-				  objsensIndex= BitLibrary.compute(0,  iid);
-			  }
-	   	 accessSPE(iid,id, false, objsensIndex);
+			  accessSPE_static_field(iid,id, false, iid);
 		}else {
 			// future
 		}
 	    }
 	    
 	    public static void readBeforeStatic(int iid,long id, String classname, int lineNO,long value) {		
-	    	
-	    	 
 	    	 
 	    	 if(leap){			
 					synchronized (accessVectorGroup[iid]) {
@@ -1244,11 +1082,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);		
+					  accessSPE_static_field(iid,id, true, iid);		
 				}else {
 					// future
 				} 	
@@ -1265,11 +1099,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute(0,  iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);
+				  accessSPE_static_field(iid,id, false, iid);
 			}else {
 				// future
 			}
@@ -1284,11 +1114,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex  = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex= BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_static_field(iid,id, true, iid);	
 				}else {
 					// future
 				} 	
@@ -1305,11 +1131,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute(0,  iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);
+				  accessSPE_static_field(iid,id, false, iid);
 			}else {
 				// future
 			}
@@ -1327,11 +1149,7 @@ public class RecordMonitor {
 						perThreadGroup[(int)id].add(value);// value
 						perThreadGroup[(int)id].add(accessVectorGroup[iid].size());// index of current write.
 				}else if(myBasic){
-					int objsensIndex = -1;
-					  if(opt_obj_sensitivity){
-						  objsensIndex = BitLibrary.compute(0,  iid);
-					  }
-			    	 accessSPE(iid,id, true, objsensIndex);	
+					  accessSPE_static_field(iid,id, true, iid);	
 				}else {
 					// future
 				} 	
@@ -1348,11 +1166,7 @@ public class RecordMonitor {
 						accessVectorGroup[iid].add(id);
 					}				
 			}else if(myBasic){
-		    	int objsensIndex  = -1;
-				  if(opt_obj_sensitivity){
-					  objsensIndex= BitLibrary.compute(0,  iid);
-				  }
-		   	 accessSPE(iid,id, false, objsensIndex);
+				  accessSPE_static_field(iid,id, false, iid);
 			}else {
 				// future
 			}
@@ -1373,32 +1187,25 @@ public class RecordMonitor {
 	    
 	    
 
-	    public static int rCount = 0;
-	    public static int wCount = 0;
-	    public static boolean fakedShared = true;
-	public static void accessSPE(int index,long threadId, boolean read, int objSensIndex) {
-		if(opt_obj_sensitivity)
-		{ index = objSensIndex; }
-		
-		
+	 
+	public static void accessSPE_array_index(int index,long threadId, boolean read, Object array, int arrayindex) {		
 		long curCounter =incInsCounter(threadId);
 		
 		if(!read)
 		{		
 			long oldLatestInstCounter=-1;
-			boolean add = false; 
 		    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
 		    {
-				oldLatestInstCounter= latestWritesInstCounter[index];	
-				if(!sameThread(oldLatestInstCounter, curCounter))
+		    	if(!opt_reduce_write_seq)
 				{
-					add = true;
-					
-				}					
+		    		oldLatestInstCounter= latestWritesInstCounter[index];		
+		    	}								
 				latestWritesInstCounter[index] = curCounter;	
 			}	
-		    if(add)
-		    	addOrder(threadId, index, oldLatestInstCounter, curCounter);
+			if(!opt_reduce_write_seq){
+				if(!sameThread(oldLatestInstCounter, curCounter))
+					addOrder(threadId, index, oldLatestInstCounter, curCounter);
+			}
 		 }
 		else//	if(read)
 		{
@@ -1426,6 +1233,108 @@ public class RecordMonitor {
 		
 	
    	}
+	
+	public static void accessSPE_object_field(int index,long threadId, boolean read, Object baseObject, int field) {
+		
+		
+		long curCounter =incInsCounter(threadId);
+		
+		if(!read)
+		{		
+			long oldLatestInstCounter=-1;
+		    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
+		    {
+		    	if(!opt_reduce_write_seq){
+		    		oldLatestInstCounter= latestWritesInstCounter[index];	
+		    	}
+				
+				latestWritesInstCounter[index] = curCounter;	
+			}	
+		    if(!opt_reduce_write_seq){
+		    	  if(!sameThread(oldLatestInstCounter, curCounter))
+					   	addOrder(threadId, index, oldLatestInstCounter, curCounter);
+		    }
+		  
+		 }
+		else//	if(read)
+		{
+			long counterOfTheWrite=-1;
+			for(;;){
+				counterOfTheWrite= latestWritesInstCounter[index];				
+				
+				if(latestWritesInstCounter[index]==counterOfTheWrite)
+				{
+					break;
+				}
+				// else loop back.
+			}				
+			// store the relation: latest write -> current read, if they belong to different threads.
+			//opt_Reads_of_same_write&&
+			if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+			{
+				if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+				{
+					addOrder(threadId, index, counterOfTheWrite, curCounter);
+				   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+				}
+			}
+		}
+		
+	
+   	}
+	
+	
+	
+public static void accessSPE_static_field(int index,long threadId, boolean read, int staticfield) {
+		
+		
+		long curCounter =incInsCounter(threadId);
+		
+		if(!read)
+		{		
+			long oldLatestInstCounter=-1;
+		    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
+		    {
+		    	if(!opt_reduce_write_seq){
+		    		oldLatestInstCounter= latestWritesInstCounter[index];	
+		    	}
+				
+				latestWritesInstCounter[index] = curCounter;	
+			}	
+		    if(!opt_reduce_write_seq){
+		    	 if(!sameThread(oldLatestInstCounter, curCounter))
+					   	addOrder(threadId, index, oldLatestInstCounter, curCounter);
+		    }
+		   
+		 }
+		else//	if(read)
+		{
+			long counterOfTheWrite=-1;
+			for(;;){
+				counterOfTheWrite= latestWritesInstCounter[index];				
+				
+				if(latestWritesInstCounter[index]==counterOfTheWrite)
+				{
+					break;
+				}
+				// else loop back.
+			}				
+			// store the relation: latest write -> current read, if they belong to different threads.
+			//opt_Reads_of_same_write&&
+			if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+			{
+				if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+				{
+					addOrder(threadId, index, counterOfTheWrite, curCounter);
+				   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+				}
+			}
+		}
+		
+	
+   	}
+	
+	
     /**
 	 * @param index
 	 * @param threadId
