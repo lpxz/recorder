@@ -141,7 +141,11 @@ public class RecordMonitor {
 		
 		
 		threadNameToIdMap = new HashMap<String,Long>();
+		start = System.currentTimeMillis();
+		
 	}
+	
+	public static long start = -1;
     
 	public static String mainClass;
 	public static String methodname;
@@ -931,6 +935,7 @@ public class RecordMonitor {
 	 */
 	// a more safe way is to check whether it exceeds the bit scope of the counter.
 	private static long incInsCounter(long threadId) {
+//		instCounterXXX++;
 		return ++instCounterGroup[(int)threadId];		
 	}
 	

@@ -25,7 +25,7 @@ public class MonitorThread extends Thread
 	public void run()
 	{
 
-		System.out.println("duration: " + (System.currentTimeMillis()- RecordMain.start));
+		System.out.println("duration: " + (System.currentTimeMillis()- RecordMonitor.start));
 		System.out.println(RecordMonitor.rCount + " " + RecordMonitor.wCount);
 		
 		if(RecordMonitor.isCrashed)

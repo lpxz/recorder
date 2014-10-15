@@ -41,7 +41,7 @@ public class RecordMain {
 			run(args.subList(++index, args.size()));
 	}
 	
-	public static long start = -1;
+
 	private static void run(List<String> args)
 	{
 		try 
@@ -68,7 +68,6 @@ public class RecordMain {
 		    		mainArgs[k] = args.get(k+1);
 		    }
 		    
-		    start =System.currentTimeMillis();
 		    main.invoke(null, (Object)mainArgs);
 		  // analysis here:
 		    
