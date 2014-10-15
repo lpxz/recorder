@@ -25,7 +25,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 
-
+// 30115, 
 public class RecordMonitor {
 	private static final int COUNTER_BIT_SIZE = 48;
 
@@ -37,7 +37,7 @@ public class RecordMonitor {
 	public static boolean stride= false;
 	
 	public static boolean myBasic= true;//  752
-	public static boolean opt_obj_sensitivity = false;
+	public static boolean opt_obj_sensitivity = true;
 //	public static boolean opt_Reads_of_same_write=false; 
 	
 	
@@ -250,7 +250,7 @@ public class RecordMonitor {
 	  public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,boolean value) {		
 		  int objsensIndex = -1;
 		  if(opt_obj_sensitivity){
-		  objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
+		     objsensIndex=BitLibrary.compute( System.identityHashCode(o), arrayindex);
 		  }
 		  
 		  accessSPE(iid,id, true, objsensIndex);		
@@ -845,55 +845,55 @@ public class RecordMonitor {
 			
 			
 		}else if(myBasic){
-			if(opt_obj_sensitivity)
-			{ index = objSensIndex; }
-			
-			
-			long curCounter =incInsCounter(threadId);
-			
-			if(!read)
-			{		
-				long oldLatestInstCounter=-1;
-				boolean add = false; 
-			    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
-			    {
-					oldLatestInstCounter= latestWritesInstCounter[index];	
-					if(!sameThread(oldLatestInstCounter, curCounter))
-					{
-						add = true;
-						
-					}					
-					latestWritesInstCounter[index] = curCounter;	
-				}	
-			    if(add)
-			    	addOrder(threadId, index, oldLatestInstCounter, curCounter);
-			    
-			    	
-			    
-			 }
-			else//	if(read)
-			{
-				long counterOfTheWrite=-1;
-				for(;;){
-					counterOfTheWrite= latestWritesInstCounter[index];				
-					
-					if(latestWritesInstCounter[index]==counterOfTheWrite)
-					{
-						break;
-					}
-					// else loop back.
-				}				
-				// store the relation: latest write -> current read, if they belong to different threads.
-				//opt_Reads_of_same_write&&
-				if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
-				{
-					if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
-					{
-						addOrder(threadId, index, counterOfTheWrite, curCounter);
-					   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
-					}
-				}
-			}
+//			if(opt_obj_sensitivity)
+//			{ index = objSensIndex; }
+//			
+//			
+//			long curCounter =incInsCounter(threadId);
+//			
+//			if(!read)
+//			{		
+//				long oldLatestInstCounter=-1;
+//				boolean add = false; 
+//			    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
+//			    {
+//					oldLatestInstCounter= latestWritesInstCounter[index];	
+//					if(!sameThread(oldLatestInstCounter, curCounter))
+//					{
+//						add = true;
+//						
+//					}					
+//					latestWritesInstCounter[index] = curCounter;	
+//				}	
+//			    if(add)
+//			    	addOrder(threadId, index, oldLatestInstCounter, curCounter);
+//			    
+//			    	
+//			    
+//			 }
+//			else//	if(read)
+//			{
+//				long counterOfTheWrite=-1;
+//				for(;;){
+//					counterOfTheWrite= latestWritesInstCounter[index];				
+//					
+//					if(latestWritesInstCounter[index]==counterOfTheWrite)
+//					{
+//						break;
+//					}
+//					// else loop back.
+//				}				
+//				// store the relation: latest write -> current read, if they belong to different threads.
+//				//opt_Reads_of_same_write&&
+//				if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+//				{
+//					if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+//					{
+//						addOrder(threadId, index, counterOfTheWrite, curCounter);
+//					   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+//					}
+//				}
+//			}
 			
 		}else {
 			// future
@@ -925,9 +925,7 @@ public class RecordMonitor {
 	 */
 	private static void addOrder(long threadid, int index, long oldLatestInstCounter, long instCounter) {
 // no need for sync!
-   						
-		myAccessVectorGroup[(int)threadid][index].put(instCounter, oldLatestInstCounter);	   			
-	  	
+		myAccessVectorGroup[(int)threadid][index].put(instCounter, oldLatestInstCounter);  	
 	}
 
 	/**
