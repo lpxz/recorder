@@ -1191,6 +1191,7 @@ public class RecordMonitor {
 	public static void accessSPE_array_index(int index,long threadId, boolean read, Object array, int arrayindex) {		
 		long curCounter =incInsCounter(threadId);
 		
+		index = arrayindex%1024;
 		if(!read)
 		{		
 			long oldLatestInstCounter=-1;
@@ -1236,7 +1237,7 @@ public class RecordMonitor {
 	
 	public static void accessSPE_object_field(int index,long threadId, boolean read, Object baseObject, int field) {
 		
-		
+		index = baseObject.hashCode()%1024;
 		long curCounter =incInsCounter(threadId);
 		
 		if(!read)
@@ -1287,7 +1288,8 @@ public class RecordMonitor {
 	
 public static void accessSPE_static_field(int index,long threadId, boolean read, int staticfield) {
 		
-		
+	    index = staticfield;
+	
 		long curCounter =incInsCounter(threadId);
 		
 		if(!read)
