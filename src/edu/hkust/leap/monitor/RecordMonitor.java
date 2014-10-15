@@ -7,7 +7,9 @@ package edu.hkust.leap.monitor;
 //import java.util.zip.GZIPOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 //
@@ -25,6 +27,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 public class RecordMonitor {
+	private static final int COUNTER_BIT_SIZE = 48;
+
+	private static final long MAGIC_NUMBER = ((long)1)<<COUNTER_BIT_SIZE;
+	
+	
 	//28470
 	public static boolean leap= false;//1163
 	public static boolean stride= false;
@@ -56,13 +63,14 @@ public class RecordMonitor {
 	public static long[] latestWritesInstCounter;
 	public static Object[] locks4latestWrites;	//latest write's thread, lastest write's inst counter.
 	
-	public static long[][] writeTIDOfLastReadOfAccess;// first represent the TID index, second represents the access index.	
-	public static long[][] writeCounterOfLastReadOfAccess;// first represent the TID index, second represents the access index.	
+//	public static long[][] writeTIDOfLastReadOfAccess;// first represent the TID index, second represents the access index.	
+	public static long[][] counterOfLastReadsWrite;// first represent the TID index, second represents the access index.	
 	
 	
 	
-	public static ConcurrentHashMap mapping = new ConcurrentHashMap();
-	public static Vector[] mappingsGroup;	
+	public static LinkedHashMap[][] myAccessVectorGroup;	
+	
+	
 	
 	public static ReentrantReadWriteLock[] rws ;
 	public static void initialize(int size)
@@ -89,16 +97,10 @@ public class RecordMonitor {
 		instCounterGroup =new long[threadSize];
 		for(int i=0;i<threadSize;i++)
 		{
-			instCounterGroup[i] = ((long)i)<<59;	// initialize		
+			instCounterGroup[i] = ((long)i)<<COUNTER_BIT_SIZE;	// initialize		
 		}
 		
-		
-//		latestWritesTid = new long[accessedLocSize];
-//		for(int i=0;i<accessedLocSize;i++)
-//		{
-//			latestWritesTid[i] = -1;	// initialize		
-//		}
-		
+
 		latestWritesInstCounter = new long[accessedLocSize];
 		for(int i=0;i<accessedLocSize;i++)
 		{
@@ -112,31 +114,26 @@ public class RecordMonitor {
 			locks4latestWrites[i] = ""+i;
 		}
 		
-		
-        mappingsGroup = new Vector[accessedLocSize];// assume 100 threads maximally
-		
-		for(int i=0;i<accessedLocSize;i++)
-		{
-			mappingsGroup[i] = new Vector<Long>();//new MyAccessVector();
-			
-		}
-		
-		
-		writeTIDOfLastReadOfAccess= new long[threadSize][accessedLocSize];
-		for(int i=0 ; i< threadSize; i++)
-		{
-			for(int j=0; j< accessedLocSize; j++)
+		// better than hashmap. 
+		 myAccessVectorGroup = new LinkedHashMap[threadSize][accessedLocSize];// assume 100 threads maximally
+		 for(int i=0 ; i< threadSize; i++)
 			{
-				writeTIDOfLastReadOfAccess[i][j]=-1;
+				for(int j=0; j< accessedLocSize; j++)
+				{
+					myAccessVectorGroup[i][j]= new LinkedHashMap();
+				}
 			}
-		}
 		
-		writeCounterOfLastReadOfAccess= new long[threadSize][accessedLocSize];
+       
+		
+		
+		
+		counterOfLastReadsWrite= new long[threadSize][accessedLocSize];
 		for(int i=0 ; i< threadSize; i++)
 		{
 			for(int j=0; j< accessedLocSize; j++)
 			{
-				writeCounterOfLastReadOfAccess[i][j]=-1;
+				counterOfLastReadsWrite[i][j]=-1;
 			}
 		}
 		
@@ -848,47 +845,35 @@ public class RecordMonitor {
 			{ index = objSensIndex; }
 			
 			
-			long instCounter =incInsCounter(threadId);
-			
-			long oldLatestInstCounter=-1;
-			
+			long curCounter =incInsCounter(threadId);
 			
 			if(!read)
 			{		
-
-
-				
-			    synchronized (locks4latestWrites[index])
+				long oldLatestInstCounter=-1;
+				boolean add = false; 
+			    synchronized (locks4latestWrites[index])//1:3 3 are optimized.
 			    {
-					oldLatestInstCounter= latestWritesInstCounter[index];					
-					latestWritesInstCounter[index] = instCounter;	
+					oldLatestInstCounter= latestWritesInstCounter[index];	
+					if(!sameThread(oldLatestInstCounter, curCounter))
+					{
+						add = true;
+						
+					}					
+					latestWritesInstCounter[index] = curCounter;	
 				}	
-			    // store the relation: latest write -> current write, if they belong to different threads.
-			    long oldLatestTID =oldLatestInstCounter>>59;
-			    if( oldLatestTID!=threadId)
-			    {	
-			    	rCount++;
-					synchronized (mappingsGroup[index]) {
-						mappingsGroup[index].add(oldLatestInstCounter);						
-						mappingsGroup[index].add(instCounter);
-					}
-					
-				}
-			    else {
-					wCount++;
-				}
+			    if(add)
+			    	addOrder(threadId, index, oldLatestInstCounter, curCounter);
+			    
+			    	
+			    
 			 }
 			else//	if(read)
 			{
-				long oldLatestTID =-1;
+				long counterOfTheWrite=-1;
 				for(;;){
-					oldLatestInstCounter= latestWritesInstCounter[index];
-					oldLatestTID = oldLatestInstCounter >>59;
-				
-					boolean haha= fakedShared;
+					counterOfTheWrite= latestWritesInstCounter[index];				
 					
-					
-					if(((latestWritesInstCounter[index])>>59)==oldLatestTID && latestWritesInstCounter[index]==oldLatestInstCounter)
+					if(latestWritesInstCounter[index]==counterOfTheWrite)
 					{
 						break;
 					}
@@ -896,24 +881,12 @@ public class RecordMonitor {
 				}				
 				// store the relation: latest write -> current read, if they belong to different threads.
 				//opt_Reads_of_same_write&&
-				if( writeCounterOfLastReadOfAccess[(int)threadId][index]==oldLatestInstCounter )
+				if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
 				{
-					// last read (local) and this read read from same write. 
-				}
-				else 
-				{
-					if(oldLatestTID!=threadId)//write and read from same thread.
+					if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
 					{
-						synchronized (mappingsGroup[index]) {
-							mappingsGroup[index].add(oldLatestInstCounter);						
-							mappingsGroup[index].add(instCounter);
-						}
-						
-//						if(opt_Reads_of_same_write)
-						{
-						   writeTIDOfLastReadOfAccess[(int)threadId][index]=oldLatestTID ;
-						   writeCounterOfLastReadOfAccess[(int)threadId][index]=oldLatestInstCounter ;
-						}		
+						addOrder(threadId, index, counterOfTheWrite, curCounter);
+					   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
 					}
 				}
 			}
@@ -933,8 +906,30 @@ public class RecordMonitor {
 
 
 	/**
+	 * @param oldLatestInstCounter
+	 * @param instCounter
+	 * @return
+	 */
+	private static boolean sameThread(long oldLatestInstCounter, long instCounter) {		
+		return ((oldLatestInstCounter^instCounter) < MAGIC_NUMBER);// 1<<48
+	}
+
+	/**
+	 * @param index
+	 * @param oldLatestInstCounter
+	 * @param instCounter
+	 */
+	private static void addOrder(long threadid, int index, long oldLatestInstCounter, long instCounter) {
+// no need for sync!
+   						
+		myAccessVectorGroup[(int)threadid][index].put(instCounter, oldLatestInstCounter);	   			
+	  	
+	}
+
+	/**
 	 * @param threadId
 	 */
+	// a more safe way is to check whether it exceeds the bit scope of the counter.
 	private static long incInsCounter(long threadId) {
 		return ++instCounterGroup[(int)threadId];		
 	}

@@ -28,7 +28,7 @@ public class BitLibrary {
         long k = 134217730;
                   
         
-        long m = ((long)1)<<59;
+        long m = ((long)1)<<48;
         System.out.println(m);
         
         System.out.println(Long.toBinaryString((m>>59)));
@@ -39,7 +39,7 @@ public class BitLibrary {
 		System.out.println(toBinary(134217730));
 		
 		
-
+        
 		
 	}
 	
