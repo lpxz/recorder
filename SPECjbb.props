@@ -73,11 +73,11 @@
 
 input.jvm_instances=1
 
-input.starting_number_warehouses=1
+input.starting_number_warehouses=8
 
 input.increment_number_warehouses=1
 
-#input.ending_number_warehouses=2
+input.ending_number_warehouses=8
 
 #The default value for input.expected_peak_warehouse
 #is Runtime.getRuntime.availableProcessors
@@ -191,8 +191,8 @@ input.deterministic_random_seed=false
 
 # rampup and rampdown specify rampup and rampdown for multi-jvm mode
 # only. (seconds)
-input.per_jvm_warehouse_rampup=3
-input.per_jvm_warehouse_rampdown=20
+input.per_jvm_warehouse_rampup=1
+input.per_jvm_warehouse_rampdown=1
 
 #
 # If you need to collect stats or profiles, it may be useful to increase
@@ -204,8 +204,8 @@ input.per_jvm_warehouse_rampdown=20
 # Amount of time to run each point prior to the measurement window
 
 
-input.ramp_up_seconds=30
+input.ramp_up_seconds=4
 
 # Time of measurement window
 
-input.measurement_seconds=240
+input.measurement_seconds=8

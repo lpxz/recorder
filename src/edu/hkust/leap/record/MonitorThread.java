@@ -25,6 +25,9 @@ public class MonitorThread extends Thread
 	public void run()
 	{
 
+		System.out.println("duration: " + (System.currentTimeMillis()- RecordMonitor.start));
+		System.out.println(RecordMonitor.rCount + " " + RecordMonitor.wCount);
+		
 		if(RecordMonitor.isCrashed)
 		{
 			System.err.println("--- program crashed! ---");
@@ -35,7 +38,8 @@ public class MonitorThread extends Thread
 		}
 		else
 		{
-			generateTestDriver(saveMonitorData());
+			saveMonitorData();
+//			generateTestDriver(saveMonitorData());
 		}
 	   
 		
@@ -43,45 +47,7 @@ public class MonitorThread extends Thread
 	    
 	}
 	
-//	public void ARflipPractice()
-//	{
-//		 Set<ARPair> arps = AtomicRegionManager.findARs(RecordMonitor.cg);
-//	    for (ARPair arPair : arps) 	    	
-//    	{  		 
-//    		 CausalGraphFlipping.reverseInnerEdgesLocally(RecordMonitor.cg, arPair);
-//    		 RecordMonitor.cg.exportCausalGraph("/home/lpxz/eclipse/workspace/leap/recorder/test.dot");
-//			 CausalGraphFlipping.reverseInnerEdgesBackLocally(RecordMonitor.cg, arPair);			
-//    	}
-//	}
-	
 
-
-//	public void sharedMemStatistic()
-//	{// shared variables
-//		   List<CausalEdge> edges =CausalGraphTraversal.getSharedAccessEdges(RecordMonitor.cg);
-//		   Set sharedMems = new HashSet();
-//		   for(CausalEdge edge:edges)
-//		   {
-//			   CriticalEvent sourcEvent = (CriticalEvent)edge.getSource();
-////			   CriticalEvent tgtEvent = (CriticalEvent)edge.getTarget();
-//			   sharedMems.add(sourcEvent.getMem());
-//			  
-//		   }
-//		   System.err.println("shared memory NO.:" + sharedMems.size());
-//	}
-//	
-//	public void lockFlipPractice()
-//	{
-//		List<CausalEdge> lockEdges =CausalGraphTraversal.getLockingEdges(RecordMonitor.cg);
-//        for(CausalEdge edge : lockEdges)
-//        {
-//        	RecordMonitor.cg.exportCausalGraph("/home/lpxz/eclipse/workspace/leap/recorder/test1.dot");
-//          LockingCausalEdge flipped= CausalGraphFlipping.flipLockEdge(RecordMonitor.cg, (LockingCausalEdge)edge);
-//            RecordMonitor.cg.exportCausalGraph("/home/lpxz/eclipse/workspace/leap/recorder/test2.dot");
-//            CausalGraphFlipping.flipLockEdgeBack(RecordMonitor.cg, flipped);
-//        }
-//	}
-//	
 	
 	 public static String saveMonitorData()
 	    {
@@ -116,7 +82,7 @@ public class MonitorThread extends Thread
 
 
 //				
-				Serializer.storeObject(RecordMonitor.accessVector, traceFileName);
+				Serializer.storeObject(RecordMonitor.accessVectorGroup, traceFileName);
 				Serializer.storeObject(RecordMonitor.threadNameToIdMap, traceMapFileName);
 
 //				

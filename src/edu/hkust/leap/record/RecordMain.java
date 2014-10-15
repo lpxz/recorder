@@ -15,13 +15,13 @@ public class RecordMain {
 	// Note that to change the buildpath!!
 	// NOTE to change the CrashTestCaseGenerator. invoke main(): LP version
 	public static void main(String[] args) {
-		String argfileName= Util.getRecordArgFile();
-		String argline= Util.getArgLine(argfileName);
-		String[]  arglineItems = argline.split(" ");
+//		String argfileName= Util.getRecordArgFile();
+//		String argline= Util.getArgLine(argfileName);
+//		String[]  arglineItems = argline.split(" ");
 		
 
 		
-		List<String>  arg = new LinkedList(Arrays.asList(arglineItems));
+		List<String>  arg = new LinkedList(Arrays.asList(args));
 		int len = arg.size();
 		if(len==0)
 		{
@@ -40,6 +40,8 @@ public class RecordMain {
 			RecordMonitor.initialize(Integer.valueOf(args.get(0)));
 			run(args.subList(++index, args.size()));
 	}
+	
+
 	private static void run(List<String> args)
 	{
 		try 
@@ -65,6 +67,7 @@ public class RecordMain {
 		    	for(int k=0;k<args.size()-1;k++)
 		    		mainArgs[k] = args.get(k+1);
 		    }
+		    
 		    main.invoke(null, (Object)mainArgs);
 		  // analysis here:
 		    

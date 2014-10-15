@@ -35,17 +35,18 @@ public class Util {
 	public static String getOrderDataDirectory() 
 	{
 		String tempdir = System.getProperty("user.dir");
-		tempdir=tempdir.replace("recorder", "replayer");
+//		tempdir=tempdir.replace("recorder", "replayer");
 		
-		if (!(tempdir.endsWith("/") || tempdir.endsWith("\\"))) {
-			tempdir = tempdir + System.getProperty("file.separator");
-		}		
-		File tempFile = new File(tempdir);
-		if(!(tempFile.exists()))
-			tempFile.mkdir();
+//		if (!(tempdir.endsWith("/") || tempdir.endsWith("\\"))) {
+//			tempdir = tempdir + System.getProperty("file.separator");
+//		}		
+		
 			
 		tempdir = tempdir+System.getProperty("file.separator")+
 		"OrderData"+ System.getProperty("file.separator");
+		File tempFile = new File(tempdir);
+		if(!(tempFile.exists()))
+			tempFile.mkdir();
 		
 		return tempdir;
 	}
