@@ -27,13 +27,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 // 30115, 
 public class RecordMonitor {
-	private static final int COUNTER_BIT_SIZE = 48;
-
-	private static final long MAGIC_NUMBER = ((long)1)<<COUNTER_BIT_SIZE;
-
-	private static final int PARTITIONCOUNT = 1024;
 	
-	
+	/*              options:               */
 	//28470
 	public static boolean leap= false;//1163
 	public static boolean stride= false;
@@ -41,41 +36,42 @@ public class RecordMonitor {
 	public static boolean myBasic= true;//  752
 	public static boolean opt_reduce_write_seq = true;
 	public static boolean opt_obj_sensitivity = true;
-//	public static boolean opt_Reads_of_same_write=false; 
+	
+	public static boolean opt_reduce__local_read_seq_of_same_write=true; 
+	public static boolean opt_reduce_read_of_local_write=true; 
 	
 	
+	/*              constants               */
+	private static final int COUNTER_BIT_SIZE = 48;
+	private static final long MAGIC_NUMBER = ((long)1)<<COUNTER_BIT_SIZE;
+	private static final int PARTITIONCOUNT = 1024;
 	public static int readCount =0;
 	public static int writeCount =0;
-	
-	public static int accessedLocSize = 1000;
-	
+	public static int accessedLocSize = 1024;	
 	public static int threadSize = 30;
 	
 	
 	
+	
+	
+	
+	/*              data structures:               */
 	public static boolean isCrashed = false;
 	public static Throwable crashedException=null;
 	public static HashMap<String,Long> threadNameToIdMap;		
-	public static Vector[] accessVectorGroup;	
-	
-	public static Vector[] perThreadGroup;	
-	
+	public static Vector[] accessVectorGroup;		
+	public static Vector[] perThreadGroup;		
 	public static long[] instCounterGroup;	
-	
 //	public static long[] latestWritesTid;	//latest write's thread, lastest write's inst counter.
 	public static long[] latestWritesInstCounter;
 	public static Object[] locks4latestWrites;	//latest write's thread, lastest write's inst counter.
 	
 //	public static long[][] writeTIDOfLastReadOfAccess;// first represent the TID index, second represents the access index.	
 	public static long[][] counterOfLastReadsWrite;// first represent the TID index, second represents the access index.	
+    public static LinkedHashMap[][] myAccessVectorGroup;	
 	
 	
 	
-	public static LinkedHashMap[][] myAccessVectorGroup;	
-	
-	
-	
-	public static ReentrantReadWriteLock[] rws ;
 	public static void initialize(int size)
 	{
 		
@@ -1225,12 +1221,16 @@ public class RecordMonitor {
 			}				
 			// store the relation: latest write -> current read, if they belong to different threads.
 			//opt_Reads_of_same_write&&
-			if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+			if(opt_reduce__local_read_seq_of_same_write&& counterOfLastReadsWrite[(int)threadId][index]==counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
 			{
-				if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+				
+			}else {
+				if(opt_reduce_read_of_local_write&&sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
 				{
+				
+				}else {
 					addOrder(threadId, index, counterOfTheWrite, curCounter);
-				   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+					   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
 				}
 			}
 		}
@@ -1274,12 +1274,16 @@ public class RecordMonitor {
 			}				
 			// store the relation: latest write -> current read, if they belong to different threads.
 			//opt_Reads_of_same_write&&
-			if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+			if(opt_reduce__local_read_seq_of_same_write&& counterOfLastReadsWrite[(int)threadId][index]==counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
 			{
-				if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+				
+			}else {
+				if(opt_reduce_read_of_local_write&&sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
 				{
+					
+				}else {
 					addOrder(threadId, index, counterOfTheWrite, curCounter);
-				   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+					   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
 				}
 			}
 		}
@@ -1326,12 +1330,16 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 			}				
 			// store the relation: latest write -> current read, if they belong to different threads.
 			//opt_Reads_of_same_write&&
-			if( counterOfLastReadsWrite[(int)threadId][index]!=counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
+			if( opt_reduce__local_read_seq_of_same_write&&counterOfLastReadsWrite[(int)threadId][index]==counterOfTheWrite ) // opt: if I and the previous read read from the same write, skip me.
 			{
-				if(!sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
+				
+			}else {
+				if(opt_reduce_read_of_local_write&&sameThread(counterOfTheWrite, curCounter))//write and read from same thread. 4:26
 				{
+					
+				}else {
 					addOrder(threadId, index, counterOfTheWrite, curCounter);
-				   counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
+					counterOfLastReadsWrite[(int)threadId][index]=counterOfTheWrite ;
 				}
 			}
 		}
@@ -1475,6 +1483,9 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 				}				
 		}else if(myBasic){
 			synchronized (accessVectorGroup[iid]) {
+				if(opt_obj_sensitivity)
+					iid = o.hashCode()%PARTITIONCOUNT;
+				
 				accessVectorGroup[iid].add(id);
 			}	
 		}else {
@@ -1492,6 +1503,9 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 				}				
 		}else if(myBasic){
 			synchronized (accessVectorGroup[iid]) {
+				if(opt_obj_sensitivity)
+					iid = o.hashCode()%PARTITIONCOUNT;
+				
 				accessVectorGroup[iid].add(id);
 			}	
 		}else {
@@ -1509,6 +1523,9 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 				}				
 		}else if(myBasic){
 			synchronized (accessVectorGroup[iid]) {
+				if(opt_obj_sensitivity)
+					iid = o.hashCode()%PARTITIONCOUNT;
+				
 				accessVectorGroup[iid].add(id);
 			}	
 		}else {
@@ -1526,6 +1543,9 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 				}				
 		}else if(myBasic){
 			synchronized (accessVectorGroup[iid]) {
+				if(opt_obj_sensitivity)
+					iid = o.hashCode()%PARTITIONCOUNT;
+				
 				accessVectorGroup[iid].add(id);
 			}	
 		}else {
