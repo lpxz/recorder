@@ -30,6 +30,8 @@ public class RecordMonitor {
 	private static final int COUNTER_BIT_SIZE = 48;
 
 	private static final long MAGIC_NUMBER = ((long)1)<<COUNTER_BIT_SIZE;
+
+	private static final int PARTITIONCOUNT = 1024;
 	
 	
 	//28470
@@ -38,7 +40,7 @@ public class RecordMonitor {
 	
 	public static boolean myBasic= true;//  752
 	public static boolean opt_reduce_write_seq = true;
-//	public static boolean opt_obj_sensitivity = true;
+	public static boolean opt_obj_sensitivity = true;
 //	public static boolean opt_Reads_of_same_write=false; 
 	
 	
@@ -1190,8 +1192,9 @@ public class RecordMonitor {
 	 
 	public static void accessSPE_array_index(int index,long threadId, boolean read, Object array, int arrayindex) {		
 		long curCounter =incInsCounter(threadId);
+		if(opt_obj_sensitivity)
+		    index = arrayindex%PARTITIONCOUNT;
 		
-		index = arrayindex%1024;
 		if(!read)
 		{		
 			long oldLatestInstCounter=-1;
@@ -1236,8 +1239,8 @@ public class RecordMonitor {
    	}
 	
 	public static void accessSPE_object_field(int index,long threadId, boolean read, Object baseObject, int field) {
-		
-		index = baseObject.hashCode()%1024;
+		if(opt_obj_sensitivity)
+		      index = baseObject.hashCode()%PARTITIONCOUNT;
 		long curCounter =incInsCounter(threadId);
 		
 		if(!read)
@@ -1287,8 +1290,8 @@ public class RecordMonitor {
 	
 	
 public static void accessSPE_static_field(int index,long threadId, boolean read, int staticfield) {
-		
-	    index = staticfield;
+	if(opt_obj_sensitivity)
+	    index = staticfield;// can hardly be beyond 1024
 	
 		long curCounter =incInsCounter(threadId);
 		
