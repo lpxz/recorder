@@ -65,7 +65,8 @@ public class RecordMonitor {
 	public static HashMap<String,Long> threadNameToIdMap;		
 	public static Vector[] accessVectorGroup;	// leap should apply sync(){} to enclose the access, rather than using the special sync provided by vector.
 	
-	public static ArrayList[] perThreadGroup;	// for stride, arraylist is not synchronized, vector is.
+	public static Vector[] perThreadGroup;	// for stride, arraylist is not synchronized, vector is.
+	// why does it report crash when we change vector to arraylist (without stride being executed)
 	
 	public static long[] instCounterGroup;	
 //	public static long[] latestWritesTid;	//latest write's thread, lastest write's inst counter.
@@ -93,11 +94,11 @@ public class RecordMonitor {
 		}
 		
 		
-		perThreadGroup = new ArrayList[threadSize];// assume 100 threads maximally
+		perThreadGroup = new Vector[threadSize];// assume 100 threads maximally
 		
 		for(int i=0;i<threadSize;i++)
 		{
-			perThreadGroup[i] = new ArrayList<Long>();//new MyAccessVector();
+			perThreadGroup[i] = new Vector<Long>();//new MyAccessVector();
 			
 		}
 		
