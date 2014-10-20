@@ -5,6 +5,8 @@ package edu.hkust.leap.monitor;
 //import java.io.IOException;
 //import java.io.OutputStreamWriter;
 //import java.util.zip.GZIPOutputStream;
+import gnu.trove.list.linked.TLongLinkedList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -40,6 +42,8 @@ public class RecordMonitor {
 	public static boolean opt_reduce__local_read_seq_of_same_write=true; 
 	public static boolean opt_reduce_read_of_local_write=true; 
 	
+	public static boolean opt_avoid_autoboxing= true;
+	
 	
 	/*              constants               */
 	private static final int COUNTER_BIT_SIZE = 48;
@@ -59,8 +63,10 @@ public class RecordMonitor {
 	public static boolean isCrashed = false;
 	public static Throwable crashedException=null;
 	public static HashMap<String,Long> threadNameToIdMap;		
-	public static Vector[] accessVectorGroup;		
-	public static Vector[] perThreadGroup;		
+	public static Vector[] accessVectorGroup;	// leap should apply sync(){} to enclose the access, rather than using the special sync provided by vector.
+	
+	public static ArrayList[] perThreadGroup;	// for stride, arraylist is not synchronized, vector is.
+	
 	public static long[] instCounterGroup;	
 //	public static long[] latestWritesTid;	//latest write's thread, lastest write's inst counter.
 	public static long[] latestWritesInstCounter;
@@ -69,6 +75,8 @@ public class RecordMonitor {
 //	public static long[][] writeTIDOfLastReadOfAccess;// first represent the TID index, second represents the access index.	
 	public static long[][] counterOfLastReadsWrite;// first represent the TID index, second represents the access index.	
     public static LinkedHashMap[][] myAccessVectorGroup;	
+    public static TLongLinkedList[][] myAccessVectorGroup_Key;	
+    public static TLongLinkedList[][] myAccessVectorGroup_Value;	
 	
 	
 	
@@ -85,11 +93,11 @@ public class RecordMonitor {
 		}
 		
 		
-		perThreadGroup = new Vector[threadSize];// assume 100 threads maximally
+		perThreadGroup = new ArrayList[threadSize];// assume 100 threads maximally
 		
 		for(int i=0;i<threadSize;i++)
 		{
-			perThreadGroup[i] = new Vector<Long>();//new MyAccessVector();
+			perThreadGroup[i] = new ArrayList<Long>();//new MyAccessVector();
 			
 		}
 		
@@ -113,8 +121,7 @@ public class RecordMonitor {
 			locks4latestWrites[i] = ""+i;
 		}
 		
-		// better than hashmap. 
-		 myAccessVectorGroup = new LinkedHashMap[threadSize][accessedLocSize];// assume 100 threads maximally
+		myAccessVectorGroup = new LinkedHashMap[threadSize][accessedLocSize];// assume 100 threads maximally
 		 for(int i=0 ; i< threadSize; i++)
 			{
 				for(int j=0; j< accessedLocSize; j++)
@@ -122,7 +129,27 @@ public class RecordMonitor {
 					myAccessVectorGroup[i][j]= new LinkedHashMap();
 				}
 			}
+		 
+		 
+		myAccessVectorGroup_Key = new TLongLinkedList[threadSize][accessedLocSize];// assume 100 threads maximally
+		 for(int i=0 ; i< threadSize; i++)
+			{
+				for(int j=0; j< accessedLocSize; j++)
+				{
+					myAccessVectorGroup_Key[i][j]= new TLongLinkedList();
+				}
+			}
 		
+		 
+			myAccessVectorGroup_Value = new TLongLinkedList[threadSize][accessedLocSize];// assume 100 threads maximally
+			 for(int i=0 ; i< threadSize; i++)
+				{
+					for(int j=0; j< accessedLocSize; j++)
+					{
+						myAccessVectorGroup_Value[i][j]= new TLongLinkedList();
+					}
+				}
+			
        
 		
 		
@@ -248,7 +275,8 @@ public class RecordMonitor {
 	
 	  public static void readBeforeArrayElem(Object o, int iid,long id, String classname, int lineNO, int arrayindex,boolean value) {
 		  if(leap){			
-				synchronized (accessVectorGroup[iid]) {
+				synchronized (accessVectorGroup[iid]) 
+				{
 					accessVectorGroup[iid].add(id);
 				}
 			}else if(stride){
@@ -1375,8 +1403,16 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
 	
 	private static void addOrder(long threadid, int index, long oldLatestInstCounter, long instCounter) {
 // no need for sync!
-		
-		myAccessVectorGroup[(int)threadid][index].put(instCounter, oldLatestInstCounter);  	
+		if(opt_avoid_autoboxing){
+			// do not use hashmap for two reasons: 
+			// (1) it is slow due to the call of valueOf() in the objectWrapping. 
+			// (2) it needs to resolve conflict, which is not useful for our case.
+			myAccessVectorGroup_Key[(int)threadid][index].add(instCounter);
+			myAccessVectorGroup_Value[(int)threadid][index].add(oldLatestInstCounter);
+		}
+		else {
+			myAccessVectorGroup[(int)threadid][index].put(instCounter, oldLatestInstCounter);
+		}		
 	}
 
 	/**
@@ -1408,7 +1444,8 @@ public static void accessSPE_static_field(int index,long threadId, boolean read,
     // old-school methods:
     public static void enterMonitorAfter( int iid,long id) {
 	   	if(leap){			
-			synchronized (accessVectorGroup[iid]) {
+			synchronized (accessVectorGroup[iid]) 
+			{
 				accessVectorGroup[iid].add(id);
 			}
 		}else if(stride){
