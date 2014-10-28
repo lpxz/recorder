@@ -104,6 +104,10 @@ public class Util {
 		    while ((strLine = br.readLine()) != null)   {
 		    	if(strLine.startsWith("#"))
 		    	{continue;}
+		    	else if(strLine.isEmpty())
+		    	{
+		    		continue;
+		    	}
 		    	else
 		    	{
 		    		toret= strLine;

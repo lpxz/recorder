@@ -1,1 +1,0 @@
-java -cp soot-2.5.0.jar soot.Main -no-bodies-for-excluded -w -app -p cg.spark enabled -p cg reflection-log:out/tomcat-small/refl.log -cp ~/java_standard/jre/lib/jce.jar:~/java_standard/jre/lib/rt.jar:out/tomcat-small -main-class Harness -include org.apache. -include org.w3c. -d sootified/tomcat-small/ Harness -x org.eclipse.osgi.internal.loader.BundleLoader
