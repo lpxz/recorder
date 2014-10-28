@@ -1,5 +1,0 @@
-Apr 24, 2011 10:35:32 PM spec.jbb.JBBmain main -> INFO: Logging started
-Apr 24, 2011 10:35:32 PM spec.jbb.Company primeWithDummyData -> INFO: Loading Warehouse 1...
-Apr 24, 2011 10:35:35 PM spec.jbb.JBBmain DoARun -> INFO: Start User Threads
-Apr 24, 2011 10:35:35 PM spec.jbb.JBBmain DoARun -> INFO:   started user thread for Warehouse 1
-Apr 24, 2011 10:35:35 PM spec.jbb.Company displayResultTotals -> INFO: Timing Measurement began Sun Apr 24 22:35:35 HKT 2011 for 0.5 minutes

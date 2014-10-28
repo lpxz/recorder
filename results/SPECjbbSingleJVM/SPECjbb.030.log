@@ -1,6 +1,0 @@
-2011年7月26日 下午10:31:14 spec.jbb.JBBmain main -> 資訊: Logging started
-2011年7月26日 下午10:31:14 spec.jbb.Company primeWithDummyData -> 資訊: Loading Warehouse 1...
-2011年7月26日 下午10:31:16 spec.jbb.JBBmain DoARun -> 資訊: Start User Threads
-2011年7月26日 下午10:31:16 spec.jbb.JBBmain DoARun -> 資訊:   started user thread for Warehouse 1
-2011年7月26日 下午10:31:17 spec.jbb.Company displayResultTotals -> 資訊: Timing Measurement began Tue Jul 26 22:31:16 HKT 2011 for 0.5 minutes
-2011年7月26日 下午10:31:47 spec.jbb.Company displayResultTotals -> 資訊: Timing Measurement ended Tue Jul 26 22:31:47 HKT 2011
