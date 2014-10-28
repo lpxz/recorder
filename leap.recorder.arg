@@ -1,7 +1,7 @@
 #mainclass args (to added manually)
 #critical.Critical
-boundedbuffer.BoundedBuffer
-mergesort.MergeSort
+#boundedbuffer.BoundedBuffer
+#mergesort.MergeSort: buggy, alive thread>available thread
 
 #raytracer, monte, moldyn
 benchmarks.JGFRayTracerBenchSizeA
@@ -14,8 +14,24 @@ hedc.Tester
 weblech.driverPerf.PerformanceTest
 
 
-#ftpserver, jstamp, specjbb, jgrapht, stmbench7
-
+#ftpserver,  specjbb, jgrapht,  jstamp
+ftpserver.driverPerf.FTPMainDriver
+spec.jbb.JBBmain
+jgrapht.PerformanceDemo
+Bayes.Bayes
+Intruder.Intruder
+KMeans.KMeans
+#-i /home/lpxz/eclipse/workspacegrail/jstamp-AJ/src/KMeans/inputs/random-n2048-d16-c16.txt -nthreads 8
+Labyrinth3D.Labyrinth
+#-i /home/lpxz/eclipse/workspacegrail/jstamp-AJ/src/Labyrinth3D/inputs/random-x128-y128-z3-n128.txt -t 8
+MatrixMultiply.MatrixMultiply
+SSCA2.SSCA2
+#-t 8
+Vacation.Vacation
+#-t 800 -c 8
+Yada.yada
+#-t 8 -i /home/lpxz/eclipse/workspacegrail/jstamp-AJ/src/Yada/input/spiral.2
+#stmbench7.Benchmark
 
 
 #dacapo stuff.
