@@ -1,0 +1,4 @@
+do not use batik because most of the work is done sequentially.
+batik
+Driven by a single external thread and the bulk of its internal work is single threaded. It does use worker threads for transcoding and rendering images and the use of Java2D also greats a worker thread.
+

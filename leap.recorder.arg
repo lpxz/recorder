@@ -1,2 +1,23 @@
-# SPENO  mainclass args (to added manually)
-150 spec.jbb.JBBmain
+#mainclass args (to added manually)
+#critical.Critical
+boundedbuffer.BoundedBuffer
+mergesort.MergeSort
+
+#raytracer, monte, moldyn
+benchmarks.JGFRayTracerBenchSizeA
+benchmarks.JGFMonteCarloBenchSizeA
+benchmarks.JGFMolDynBenchSizeA
+
+#cache4j, hedc, weblech
+net.sf.cache4j.test.SynchronizedCacheTest
+hedc.Tester
+weblech.driverPerf.PerformanceTest
+
+
+#ftpserver, jstamp, specjbb, jgrapht, stmbench7
+
+
+
+#dacapo stuff.
+
+

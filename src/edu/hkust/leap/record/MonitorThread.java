@@ -19,7 +19,8 @@ import edu.hkust.leap.record.utils.Util;
 public class MonitorThread extends Thread
 {
 	
-	MonitorThread()
+	
+	public MonitorThread()
 	{
 		super("MonitorThread");
 	}
@@ -27,6 +28,12 @@ public class MonitorThread extends Thread
 	{
 
 		System.out.println("duration: " + (System.currentTimeMillis()- RecordMonitor.start));
+//		System.out.println("leapTotal: " + RecordMonitor.leaptotal );		
+//		System.out.println("myTotal: " + RecordMonitor.myTotal );
+		
+		
+//		saveMonitorData();
+		
 		
 //		for(int i=0;i<	RecordMonitor.myAccessVectorGroup.length; i++)
 //		{
@@ -40,21 +47,21 @@ public class MonitorThread extends Thread
 //			}
 //		}
 			
-		if(RecordMonitor.isCrashed)
-		{
-			System.err.println("--- program crashed! ---");
-			System.err.println("--- preparing for reproducing the crash ... ");
-			String traceFile_ = saveMonitorData();
-			System.err.println("--- generating the test driver program ... ");
-			generateTestDriver(traceFile_);
-		}
-		else
-		{
-			saveMonitorData();
-//			generateTestDriver(saveMonitorData());
-		}
+//		if(RecordMonitor.isCrashed)
+//		{
+//			System.err.println("--- program crashed! ---");
+//			System.err.println("--- preparing for reproducing the crash ... ");
+//			String traceFile_ = saveMonitorData();
+//			System.err.println("--- generating the test driver program ... ");
+//			generateTestDriver(traceFile_);
+//		}
+//		else
+//		{
+//			saveMonitorData();
+////			generateTestDriver(saveMonitorData());
+//		}
 	   
-		
+
 	    
 	    
 	}

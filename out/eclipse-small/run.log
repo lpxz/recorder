@@ -1,0 +1,26 @@
+nice -n 19 java -Xmx4G -cp dacapo-9.12-bach.jar -javaagent:poa.jar Harness --scratch-directory /tmp/dacaposcratch -n 3 eclipse -s small
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Loaded properties from /home/lpxz/work/dacapo/poa.properties
+============================================================
+Unzip workspace 
+===== DaCapo 9.12 eclipse starting warmup 1 =====
+Initialize workspace ...................
+===== DaCapo 9.12 eclipse completed warmup 1 in 1875 msec =====
+Delete workspace 
+Unzip workspace 
+===== DaCapo 9.12 eclipse starting warmup 2 =====
+Initialize workspace ...................
+===== DaCapo 9.12 eclipse completed warmup 2 in 810 msec =====
+Delete workspace 
+Unzip workspace 
+===== DaCapo 9.12 eclipse starting =====
+Initialize workspace ...................
+===== DaCapo 9.12 eclipse PASSED in 531 msec =====
+Delete workspace 
+
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Found 1403 new log entries.
+Log file written to: /home/lpxz/work/dacapo/out/eclipse-small/refl.log
+============================================================

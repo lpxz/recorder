@@ -1,0 +1,55 @@
+nice -n 19 java -Xmx4G -cp dacapo-9.12-bach.jar -javaagent:poa.jar Harness --scratch-directory /tmp/dacaposcratch -n 3 tomcat -s small
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Loaded properties from /home/lpxz/work/dacapo/poa.properties
+============================================================
+The derived number of threads (8) is outside the range [1,4]; rescaling to match thread limit.
+Using scaled threading model. 8 processors detected, 4 threads used to drive the workload, in a possible range of [1,4]
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+*** java.lang.instrument ASSERTION FAILED ***: "!errorOutstanding" with message transform method call failed at ../../../src/share/instrument/JPLISAgent.c line: 806
+Server thread created
+===== DaCapo 9.12 tomcat starting warmup 1 =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+===== DaCapo 9.12 tomcat completed warmup 1 in 3095 msec =====
+===== DaCapo 9.12 tomcat starting warmup 2 =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+===== DaCapo 9.12 tomcat completed warmup 2 in 1469 msec =====
+===== DaCapo 9.12 tomcat starting =====
+Loading web application
+Creating client threads
+Waiting for clients to complete
+Client threads complete ... unloading web application
+===== DaCapo 9.12 tomcat PASSED in 1238 msec =====
+Server stopped ... iteration complete
+
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Found 594 new log entries.
+Log file written to: /home/lpxz/work/dacapo/out/tomcat-small/refl.log
+============================================================

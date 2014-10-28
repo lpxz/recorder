@@ -1,0 +1,4 @@
+dontNormalize = false
+verbose = false
+#inDir = /tmp/out
+

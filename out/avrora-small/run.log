@@ -1,0 +1,6 @@
+nice -n 19 java -Xmx4G -cp dacapo-9.12-bach.jar -javaagent:poa.jar Harness --scratch-directory /tmp/dacaposcratch -n 3 avrora -s small
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Loaded properties from /home/lpxz/work/dacapo/poa.properties
+============================================================
+===== DaCapo 9.12 avrora starting warmup 1 =====

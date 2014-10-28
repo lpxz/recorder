@@ -107,6 +107,7 @@ public class Util {
 		    	else
 		    	{
 		    		toret= strLine;
+		    		break;
 		    	}
 		     // System.out.println (strLine);
 		    }

@@ -1,0 +1,24 @@
+nice -n 19 java -Xmx4G -cp dacapo-9.12-bach.jar -javaagent:poa.jar Harness --scratch-directory /tmp/dacaposcratch -n 3 lusearch -s small
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Loaded properties from /home/lpxz/work/dacapo/poa.properties
+============================================================
+Using scaled threading model. 8 processors detected, 8 threads used to drive the workload, in a possible range of [1,8]
+===== DaCapo 9.12 lusearch starting warmup 1 =====
+4 query batches completed
+8 query batches completed
+===== DaCapo 9.12 lusearch completed warmup 1 in 748 msec =====
+===== DaCapo 9.12 lusearch starting warmup 2 =====
+4 query batches completed
+8 query batches completed
+===== DaCapo 9.12 lusearch completed warmup 2 in 322 msec =====
+===== DaCapo 9.12 lusearch starting =====
+4 query batches completed
+8 query batches completed
+===== DaCapo 9.12 lusearch PASSED in 179 msec =====
+
+============================================================
+TamiFlex Play-Out Agent Version 2.0.1
+Found 64 new log entries.
+Log file written to: /home/lpxz/work/dacapo/out/lusearch-small/refl.log
+============================================================
