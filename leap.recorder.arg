@@ -4,7 +4,7 @@
 #mergesort.MergeSort: buggy, alive thread>available thread
 
 #raytracer, monte, moldyn
-benchmarks.JGFRayTracerBenchSizeA
+#benchmarks.JGFRayTracerBenchSizeA
 benchmarks.JGFMonteCarloBenchSizeA
 benchmarks.JGFMolDynBenchSizeA
 
